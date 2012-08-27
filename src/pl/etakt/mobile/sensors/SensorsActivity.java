@@ -1,7 +1,7 @@
 package pl.etakt.mobile.sensors;
 
 import pl.etakt.mobile.sensors.data.MySensorsManager;
-import pl.etakt.sensors.R;
+import pl.etakt.mobile.sensors.R;
 import android.app.Activity;
 import android.os.Bundle;
 
