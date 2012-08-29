@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference 
+        android:title="-- 1"
+        android:summary="-- s 1"  >
+        <intent 
+            android:targetPackage="pl.etakt.mobile.blingbling"
+            android:targetClass="pl.etakt.mobile.blingbling.SettingsActivity"
+            android:action="pl.etakt.mobile.blingbling.PREFS_ONE" />
+    </Preference>
+    <Preference 
+        android:title="-- 2"
+        android:summary="-- s 2" >
+        <intent 
+            android:targetPackage="pl.etakt.mobile.blingbling"
+            android:targetClass="pl.etakt.mobile.blingbling.SettingsActivity"
+            android:action="pl.etakt.mobile.blingbling.PREFS_TWO" />
+    </Preference>
+</PreferenceScreen>
