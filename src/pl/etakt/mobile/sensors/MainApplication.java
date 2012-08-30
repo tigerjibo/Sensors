@@ -7,11 +7,14 @@ import java.util.zip.ZipFile;
 import org.acra.ACRA;
 import org.acra.annotation.ReportsCrashes;
 
+import android.annotation.TargetApi;
 import android.app.Application;
 import android.util.Log;
 import android.view.Window;
 
-@ReportsCrashes(formKey = "dFRSUFNpLVZuNHoxdFJjRnFiRkFGNkE6MQ")
+// zaktualizowalem id - 30.08
+
+@ReportsCrashes(formKey = "dDhaR3M2UzVIUGs3Z0s5clFNRG5pVUE6MQ")
 public class MainApplication extends Application {
 
 	private static final String TAG = "MainApplication";
@@ -42,6 +45,7 @@ public class MainApplication extends Application {
 		crcTest();
 	}
 
+	@TargetApi(8)
 	private void crcTest() throws IOException {
 		boolean modified = false;
 
