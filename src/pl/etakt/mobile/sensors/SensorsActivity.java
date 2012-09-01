@@ -86,6 +86,8 @@ public class SensorsActivity extends Activity {
 			// Device
 			adRequest.addTestDevice("2cf3765d"); // Test Android Device
 			adRequest.addTestDevice("FC4AA4F51610C2029A55E3E9A323617A");
+			adRequest.addTestDevice("66B6ABDCE2873B94D565100F9A48D2AA");
+
 		}
 
 		// Initiate a generic request to load it with an ad
@@ -109,11 +111,15 @@ public class SensorsActivity extends Activity {
 
 	@Override
 	public void onPause() {
-
+		super.onPause();
 	}
 
 	@Override
 	public void onDestroy() {
+		if (adView != null) {
+			adView.destroy();
+		}
+		super.onDestroy();
 
 	}
 }
