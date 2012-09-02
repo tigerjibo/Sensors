@@ -2,18 +2,18 @@
 <ListView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/list_view_magneticfield" >
+    android:id="@+id/list_view_orientation" >
     
     <ImageView
-        android:id="@+id/icon_magneticfield"
+        android:id="@+id/icon_orientation"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_marginRight="6dip"
-        android:src="@drawable/magnetic_sensor" />
+        android:src="@drawable/orientation_sensor" />
 
     <LinearLayout
         android:orientation="vertical"
-        android:id="@+id/main_linear_layout_magneticfield"
+        android:id="@+id/main_linear_layout_orientation"
         android:layout_width="0dip"
         android:layout_weight="1"
         android:layout_height="fill_parent">
@@ -22,15 +22,15 @@
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
-            android:id="@+id/main_text_view_magneticfield"        
+            android:id="@+id/main_text_view_orientation"        
             android:gravity="center_vertical"
-            android:text="Magnetic field" />
+            android:text="Orientation sensor" />
             
         <TextView  
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:layout_weight="1" 
-            android:id="@+id/sensors_text_magneticfield"
+            android:id="@+id/sensors_text_orientation"
             android:singleLine="true"
             android:ellipsize="marquee"
             android:text="---" />
