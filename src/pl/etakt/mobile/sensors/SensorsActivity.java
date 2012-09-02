@@ -1,14 +1,18 @@
 package pl.etakt.mobile.sensors;
 
+import java.util.List;
+
 import pl.etakt.mobile.sensors.data.MySensorsManager;
 import pl.etakt.mobile.sensors.data.SensorsList;
 import pl.etakt.mobile.sensors.engine.AdMobShared;
 import pl.etakt.mobile.sensors.engine.DebugIndicator;
 import android.app.Activity;
 import android.content.Context;
+import android.hardware.Sensor;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -23,6 +27,7 @@ public class SensorsActivity extends Activity {
 
 	protected MySensorsManager mySensorsManager;
 	private SensorsList list;
+	private List<Sensor> listSensors;
 
 	protected SensorsActivity instance;
 
@@ -104,10 +109,31 @@ public class SensorsActivity extends Activity {
 		
 		list = new SensorsList(instance);
 		list.init();
+		
+		listSensors = list.get_sensors_list();
 	}
 
 	private void setComponentsGui() {
-		;
+		for(Sensor s : listSensors){
+			switch(s.getType()){
+			case Sensor.TYPE_ACCELEROMETER:
+				View layout1 = (View) findViewById(R.id.include_accelerometer);
+				layout.setVisibility(View.VISIBLE);
+				break;
+			case Sensor.TYPE_GRAVITY:
+				View layout9 = (View) findViewById(R.id.include_gravity);
+				layout9.setVisibility(View.VISIBLE);
+				break;
+			case Sensor.TYPE_GYROSCOPE:
+				View layout4 = (View) findViewById(R.id.include_gyroscope);
+				layout4.setVisibility(View.VISIBLE);
+				break;
+			case Sensor.TYPE_LIGHT:
+				View layout5 = (View) findViewById(R.id.include_light);
+				layout4.setVisibility(View.VISIBLE);
+				break;
+			}
+		}
 	}
 
 	private void setComponentsActions() {

@@ -16,21 +16,35 @@
     <include
         android:id="@+id/include_orientation_sensor"
         layout="@layout/type_orientation" />
-    
-    <include android:id="@+id/type_gyroscope" />
-    
-    <include android:id="@+id/type_light" />
-    
-    <include android:id="@+id/type_pressure" />
-    
-    <include android:id="@+id/type_temperature" />
-    
-    <include android:id="@+id/type_proximity" />
-    
+
+    <include
+        android:id="@+id/include_gyroscope"
+        layout="@layout/type_gyroscope" />
+
+    <include
+        android:id="@+id/include_light"
+        layout="@layout/type_light" />
+
+    <include
+        android:id="@+id/include_pressure"
+        layout="@layout/type_pressure" />
+
+    <include android:id="@+id/include_temperature"
+        layout="@layout/type_temperature"
+         />
+
+    <include android:id="@+id/include_proximity"
+        layout="@layout/type_proximity"
+         />
+
+    <include
+        android:id="@+id/include_gravity"
+        layout="@layout/type_gravity" />
+
     <include android:id="@+id/type_linear_acceleration" />
-    
+
     <include android:id="@+id/type_rotation_vector" />
-    
+
     <include android:id="@+id/type_relative_humidity" />
 
     <include android:id="@+id/type_ambient_temperature" />
