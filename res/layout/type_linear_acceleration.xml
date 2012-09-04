@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/list_view_linear_acceleration" >
+    
+    <ImageView
+        android:id="@+id/icon_linear_acceleration"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="6dip"
+        android:src="@drawable/linear_acceleration" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/main_linear_layout_linear_acceleration"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:id="@+id/main_text_view_linear_acceleration"        
+            android:gravity="center_vertical"
+            android:text="Linear accelerometer" />
+            
+        <TextView  
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1" 
+            android:id="@+id/sensors_text_linear_acceleration"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:text="---" />
+            
+    </LinearLayout>
+    
+
+</ListView>

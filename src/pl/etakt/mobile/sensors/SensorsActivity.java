@@ -58,7 +58,7 @@ public class SensorsActivity extends Activity {
 
 		instance = this;
 		Log.i(TAG, "After instance = this;");
-		
+
 		initiate_internals();
 
 		// Lookup your LinearLayout assuming it’s been given
@@ -106,16 +106,16 @@ public class SensorsActivity extends Activity {
 	private void initiate_internals() {
 		mySensorsManager = new MySensorsManager(instance);
 		mySensorsManager.initiate();
-		
+
 		list = new SensorsList(instance);
 		list.init();
-		
+
 		listSensors = list.get_sensors_list();
 	}
 
 	private void setComponentsGui() {
-		for(Sensor s : listSensors){
-			switch(s.getType()){
+		for (Sensor s : listSensors) {
+			switch (s.getType()) {
 			case Sensor.TYPE_ACCELEROMETER:
 				View layout1 = (View) findViewById(R.id.include_accelerometer);
 				layout.setVisibility(View.VISIBLE);
@@ -130,7 +130,17 @@ public class SensorsActivity extends Activity {
 				break;
 			case Sensor.TYPE_LIGHT:
 				View layout5 = (View) findViewById(R.id.include_light);
-				layout4.setVisibility(View.VISIBLE);
+				layout5.setVisibility(View.VISIBLE);
+				break;
+			case Sensor.TYPE_LINEAR_ACCELERATION:
+				View layout10 = (View) findViewById(R.id.include_linear_acceleration);
+				layout10.setVisibility(View.VISIBLE);
+				break;
+			case Sensor.TYPE_MAGNETIC_FIELD:
+				View layout2 = (View) findViewById(R.id.include_magneticfield);
+				layout2.setVisibility(View.VISIBLE);
+				break;
+			default:
 				break;
 			}
 		}
@@ -152,5 +162,5 @@ public class SensorsActivity extends Activity {
 		}
 		super.onDestroy();
 	}
-	
+
 }

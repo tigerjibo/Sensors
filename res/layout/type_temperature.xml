@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/list_view_accelerometer" >
+    
+    <ImageView
+        android:id="@+id/icon_accelerometer"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="6dip"
+        android:src="@drawable/accelerometer_icon_big" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/main_linear_layout_accelerometer"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:id="@+id/main_text_view_accelerometer"        
+            android:gravity="center_vertical"
+            android:text="Accelerometer" />
+            
+        <TextView  
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1" 
+            android:id="@+id/sensors_text_accelerometer"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:text="---" />
+            
+    </LinearLayout>
+    
+
+</ListView>

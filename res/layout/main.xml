@@ -29,19 +29,21 @@
         android:id="@+id/include_pressure"
         layout="@layout/type_pressure" />
 
-    <include android:id="@+id/include_temperature"
-        layout="@layout/type_temperature"
-         />
+    <include
+        android:id="@+id/include_temperature"
+        layout="@layout/type_temperature" />
 
-    <include android:id="@+id/include_proximity"
-        layout="@layout/type_proximity"
-         />
+    <include
+        android:id="@+id/include_proximity"
+        layout="@layout/type_proximity" />
 
     <include
         android:id="@+id/include_gravity"
         layout="@layout/type_gravity" />
 
-    <include android:id="@+id/type_linear_acceleration" />
+    <include android:id="@+id/include_linear_acceleration"
+        layout="@layout/type_linear_acceleration"
+         />
 
     <include android:id="@+id/type_rotation_vector" />
 
