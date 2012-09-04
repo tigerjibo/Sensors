@@ -140,6 +140,14 @@ public class SensorsActivity extends Activity {
 				View layout2 = (View) findViewById(R.id.include_magneticfield);
 				layout2.setVisibility(View.VISIBLE);
 				break;
+			case Sensor.TYPE_ORIENTATION:
+				View layout3 = (View) findViewById(R.id.include_orientation_sensor);
+				layout3.setVisibility(View.VISIBLE);
+				break;
+			case Sensor.TYPE_PRESSURE:
+				View layout6 = (View) findViewById(R.id.include_pressure);
+				layout6.setVisibility(View.VISIBLE);
+				break;
 			default:
 				break;
 			}
