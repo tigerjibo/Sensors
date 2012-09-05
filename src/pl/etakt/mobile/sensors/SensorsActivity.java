@@ -6,6 +6,7 @@ import pl.etakt.mobile.sensors.data.MySensorsManager;
 import pl.etakt.mobile.sensors.data.SensorsList;
 import pl.etakt.mobile.sensors.engine.AdMobShared;
 import pl.etakt.mobile.sensors.engine.DebugIndicator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -13,9 +14,10 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
+import android.widget.TableLayout;
 
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
@@ -31,10 +33,12 @@ public class SensorsActivity extends Activity {
 
 	protected SensorsActivity instance;
 
-	private LinearLayout layout;
+	private TableLayout layout;
 
 	private TelephonyManager tm;
 	private String deviceid;
+
+	private static final boolean FIRST_METHOD_INFLATE = true;
 
 	private AdView adView;
 	private String ADMOB_UNIT_ID = AdMobShared.ADMOB_UNIT_ID;
@@ -63,7 +67,7 @@ public class SensorsActivity extends Activity {
 
 		// Lookup your LinearLayout assuming it’s been given
 		// the attribute android:id="@+id/mainLayout"
-		layout = (LinearLayout) findViewById(R.id.main_linear_layout);
+		layout = (TableLayout) findViewById(R.id.main_linear_layout);
 
 		setComponentsGui();
 		setComponentsActions();
@@ -113,16 +117,36 @@ public class SensorsActivity extends Activity {
 		listSensors = list.get_sensors_list();
 	}
 
+	@SuppressLint("ParserError")
 	private void setComponentsGui() {
 		for (Sensor s : listSensors) {
 			switch (s.getType()) {
 			case Sensor.TYPE_ACCELEROMETER:
-				View layout1 = (View) findViewById(R.id.include_accelerometer);
-				layout.setVisibility(View.VISIBLE);
+				// View layout1 = (View)
+				// findViewById(R.id.include_accelerometer);
+				// layout.setVisibility(View.VISIBLE);
+
+				if (FIRST_METHOD_INFLATE)
+					((ViewStub) findViewById(R.id.include_accelerometer))
+							.setVisibility(View.VISIBLE);
+				else {
+					View importPanel1 = ((ViewStub) findViewById(R.id.include_accelerometer))
+							.inflate();
+				}
+
 				break;
 			case Sensor.TYPE_GRAVITY:
-				View layout9 = (View) findViewById(R.id.include_gravity);
-				layout9.setVisibility(View.VISIBLE);
+				// View layout9 = (View) findViewById(R.id.include_gravity);
+				// layout9.setVisibility(View.VISIBLE);
+
+				if (FIRST_METHOD_INFLATE)
+					((ViewStub) findViewById(R.id.include_gravity))
+							.setVisibility(View.VISIBLE);
+				else {
+					View importPanel9 = ((ViewStub) findViewById(R.id.include_gravity))
+							.inflate();
+				}
+
 				break;
 			case Sensor.TYPE_GYROSCOPE:
 				View layout4 = (View) findViewById(R.id.include_gyroscope);
