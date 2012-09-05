@@ -9,6 +9,7 @@
 
         <ViewStub
             android:id="@+id/include_accelerometer"
+            android:inflatedId="@+id/inflate_accelerometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout="@layout/type_accelerometer" />

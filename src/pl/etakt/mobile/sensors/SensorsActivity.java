@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ListView;
 import android.widget.TableLayout;
 
 import com.google.ads.AdRequest;
@@ -130,8 +131,10 @@ public class SensorsActivity extends Activity {
 					((ViewStub) findViewById(R.id.include_accelerometer))
 							.setVisibility(View.VISIBLE);
 				else {
-					View importPanel1 = ((ViewStub) findViewById(R.id.include_accelerometer))
-							.inflate();
+					/*View importPanel1 = ((ViewStub) findViewById(R.id.include_accelerometer))
+							.inflate();*/
+					ListView importPanel1 = ((ListView) findViewById(R.id.list_view_accelerometer));
+					
 				}
 
 				break;
