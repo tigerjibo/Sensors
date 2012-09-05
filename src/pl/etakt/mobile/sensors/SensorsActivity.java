@@ -38,7 +38,7 @@ public class SensorsActivity extends Activity {
 	private TelephonyManager tm;
 	private String deviceid;
 
-	private static final boolean FIRST_METHOD_INFLATE = true;
+	private static final boolean FIRST_METHOD_INFLATE = false;
 
 	private AdView adView;
 	private String ADMOB_UNIT_ID = AdMobShared.ADMOB_UNIT_ID;
@@ -149,28 +149,82 @@ public class SensorsActivity extends Activity {
 
 				break;
 			case Sensor.TYPE_GYROSCOPE:
-				View layout4 = (View) findViewById(R.id.include_gyroscope);
-				layout4.setVisibility(View.VISIBLE);
+				//View layout4 = (View) findViewById(R.id.include_gyroscope);
+				//layout4.setVisibility(View.VISIBLE);
+				
+				if (FIRST_METHOD_INFLATE)
+					((ViewStub) findViewById(R.id.include_gyroscope))
+							.setVisibility(View.VISIBLE);
+				else {
+					View importPanel4 = ((ViewStub) findViewById(R.id.include_gyroscope))
+							.inflate();
+				}
+				
 				break;
 			case Sensor.TYPE_LIGHT:
-				View layout5 = (View) findViewById(R.id.include_light);
-				layout5.setVisibility(View.VISIBLE);
+				//View layout5 = (View) findViewById(R.id.include_light);
+				//layout5.setVisibility(View.VISIBLE);
+				
+				if (FIRST_METHOD_INFLATE)
+					((ViewStub) findViewById(R.id.include_light))
+							.setVisibility(View.VISIBLE);
+				else {
+					View importPanel5 = ((ViewStub) findViewById(R.id.include_light))
+							.inflate();
+				}
+				
 				break;
 			case Sensor.TYPE_LINEAR_ACCELERATION:
-				View layout10 = (View) findViewById(R.id.include_linear_acceleration);
-				layout10.setVisibility(View.VISIBLE);
+				//View layout10 = (View) findViewById(R.id.include_linear_acceleration);
+				//layout10.setVisibility(View.VISIBLE);
+				
+				if (FIRST_METHOD_INFLATE)
+					((ViewStub) findViewById(R.id.include_linear_acceleration))
+							.setVisibility(View.VISIBLE);
+				else {
+					View importPanel10 = ((ViewStub) findViewById(R.id.include_linear_acceleration))
+							.inflate();
+				}
+				
 				break;
 			case Sensor.TYPE_MAGNETIC_FIELD:
-				View layout2 = (View) findViewById(R.id.include_magneticfield);
-				layout2.setVisibility(View.VISIBLE);
+				//View layout2 = (View) findViewById(R.id.include_magneticfield);
+				//layout2.setVisibility(View.VISIBLE);
+				
+				if (FIRST_METHOD_INFLATE)
+					((ViewStub) findViewById(R.id.include_magneticfield))
+							.setVisibility(View.VISIBLE);
+				else {
+					View importPanel2 = ((ViewStub) findViewById(R.id.include_magneticfield))
+							.inflate();
+				}
+				
 				break;
 			case Sensor.TYPE_ORIENTATION:
-				View layout3 = (View) findViewById(R.id.include_orientation_sensor);
-				layout3.setVisibility(View.VISIBLE);
+				//View layout3 = (View) findViewById(R.id.include_orientation_sensor);
+				//layout3.setVisibility(View.VISIBLE);
+				
+				if (FIRST_METHOD_INFLATE)
+					((ViewStub) findViewById(R.id.include_orientation_sensor))
+							.setVisibility(View.VISIBLE);
+				else {
+					View importPanel3 = ((ViewStub) findViewById(R.id.include_orientation_sensor))
+							.inflate();
+				}
+				
 				break;
 			case Sensor.TYPE_PRESSURE:
-				View layout6 = (View) findViewById(R.id.include_pressure);
-				layout6.setVisibility(View.VISIBLE);
+				//View layout6 = (View) findViewById(R.id.include_pressure);
+				//layout6.setVisibility(View.VISIBLE);
+				
+				if (FIRST_METHOD_INFLATE)
+					((ViewStub) findViewById(R.id.include_pressure))
+							.setVisibility(View.VISIBLE);
+				else {
+					View importPanel6 = ((ViewStub) findViewById(R.id.include_pressure))
+							.inflate();
+				}
+				
 				break;
 			default:
 				break;

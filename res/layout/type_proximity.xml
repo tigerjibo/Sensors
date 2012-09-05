@@ -2,18 +2,18 @@
 <ListView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/list_view_accelerometer" >
+    android:id="@+id/list_view_proximity" >
     
     <ImageView
-        android:id="@+id/icon_accelerometer"
+        android:id="@+id/icon_proximity"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_marginRight="6dip"
-        android:src="@drawable/accelerometer_icon_big" />
+        android:src="@drawable/proximity" />
 
     <LinearLayout
         android:orientation="vertical"
-        android:id="@+id/main_linear_layout_accelerometer"
+        android:id="@+id/main_linear_layout_proximity"
         android:layout_width="0dip"
         android:layout_weight="1"
         android:layout_height="fill_parent">
@@ -22,15 +22,15 @@
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
-            android:id="@+id/main_text_view_accelerometer"        
+            android:id="@+id/main_text_view_proximity"        
             android:gravity="center_vertical"
-            android:text="Accelerometer" />
+            android:text="proximity" />
             
         <TextView  
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:layout_weight="1" 
-            android:id="@+id/sensors_text_accelerometer"
+            android:id="@+id/sensors_text_proximity"
             android:singleLine="true"
             android:ellipsize="marquee"
             android:text="---" />

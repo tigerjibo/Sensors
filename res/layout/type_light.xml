@@ -2,18 +2,18 @@
 <ListView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/list_view_gravity" >
+    android:id="@+id/list_view_light" >
     
     <ImageView
-        android:id="@+id/icon_gravity"
+        android:id="@+id/icon_light"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_marginRight="6dip"
-        android:src="@drawable/gravity" />
+        android:src="@drawable/light" />
 
     <LinearLayout
         android:orientation="vertical"
-        android:id="@+id/main_linear_layout_gravity"
+        android:id="@+id/main_linear_layout_light"
         android:layout_width="0dip"
         android:layout_weight="1"
         android:layout_height="fill_parent">
@@ -22,15 +22,15 @@
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
-            android:id="@+id/main_text_view_gravity"        
+            android:id="@+id/main_text_view_light"        
             android:gravity="center_vertical"
-            android:text="Gravity" />
+            android:text="light" />
             
         <TextView  
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:layout_weight="1" 
-            android:id="@+id/sensors_text_gravity"
+            android:id="@+id/sensors_text_light"
             android:singleLine="true"
             android:ellipsize="marquee"
             android:text="---" />

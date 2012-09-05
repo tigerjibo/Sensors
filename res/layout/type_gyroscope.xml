@@ -5,7 +5,7 @@
     android:id="@+id/list_view_gyroscope" >
     
     <ImageView
-        android:id="@+id/icon_accelerometer"
+        android:id="@+id/icon_gyroscope"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_marginRight="6dip"
@@ -24,7 +24,7 @@
             android:layout_weight="1"
             android:id="@+id/main_text_view_gyroscope"        
             android:gravity="center_vertical"
-            android:text="Accelerometer" />
+            android:text="gyroscope" />
             
         <TextView  
             android:layout_width="fill_parent"
