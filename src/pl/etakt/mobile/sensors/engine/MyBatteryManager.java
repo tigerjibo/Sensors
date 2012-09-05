@@ -1,15 +1,25 @@
 package pl.etakt.mobile.sensors.engine;
 
+import pl.etakt.mobile.sensors.SensorsActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 
 public class MyBatteryManager {
 	
-	IntentFilter ifilter;
-	Intent batteryStatus;
+	private IntentFilter ifilter;
+	private Intent batteryStatus;
 	
-	public MyBatteryManager(){
+	private SensorsActivity instance;
+	
+	private Context context;
+	
+	public MyBatteryManager(SensorsActivity instance){
+		
+		this.instance = instance;
+		
+		context = instance.getApplicationContext();
 		
 		ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 		batteryStatus = context.registerReceiver(null, ifilter);
