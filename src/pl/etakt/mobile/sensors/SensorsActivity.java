@@ -6,6 +6,7 @@ import pl.etakt.mobile.sensors.data.MySensorsManager;
 import pl.etakt.mobile.sensors.data.SensorsList;
 import pl.etakt.mobile.sensors.engine.AdMobShared;
 import pl.etakt.mobile.sensors.engine.DebugIndicator;
+import pl.etakt.mobile.sensors.engine.DrawableFactory;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -32,6 +33,8 @@ public class SensorsActivity extends Activity {
 	protected MySensorsManager mySensorsManager;
 	private SensorsList list;
 	private List<Sensor> listSensors;
+	
+	private DrawableFactory drawableFactory;
 
 	protected SensorsActivity instance;
 
@@ -66,6 +69,8 @@ public class SensorsActivity extends Activity {
 		Log.i(TAG, "After instance = this;");
 
 		initiate_internals();
+		
+		initiate_factories();
 
 		// Lookup your LinearLayout assuming it’s been given
 		// the attribute android:id="@+id/mainLayout"
@@ -107,6 +112,12 @@ public class SensorsActivity extends Activity {
 
 		// Initiate a generic request to load it with an ad
 		adView.loadAd(adRequest);
+	}
+	
+	private void initiate_factories() {
+		
+		drawableFactory = new DrawableFactory(getPackageName());
+		
 	}
 
 	private void initiate_internals() {
