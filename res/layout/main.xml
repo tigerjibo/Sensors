@@ -5,122 +5,134 @@
     android:layout_height="fill_parent"
     android:padding="6dip" >
 
-    <TableRow>
+    <TableRow android:id="@+id/accelerometer_row">
 
-        <ViewStub
-            android:id="@+id/include_accelerometer"
-            android:inflatedId="@+id/inflate_accelerometer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout="@layout/type_accelerometer" />
+<!--         <include -->
+<!--             android:id="@+id/include_accelerometer" -->
+<!--             android:inflatedId="@+id/inflate_accelerometer" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             layout="@layout/type_accelerometer" /> -->
     </TableRow>
 
-    <TableRow>
+    <TableRow android:id="@+id/magneticfield_row">
 
-        <ViewStub
-            android:id="@+id/include_magneticfield"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout="@layout/type_magneticfield" />
+<!--         <include -->
+<!--             android:id="@+id/include_magneticfield" -->
+<!--             android:inflatedId="@+id/inflate_magneticfield" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             layout="@layout/type_magneticfield" /> -->
     </TableRow>
 
-    <TableRow>
+    <TableRow android:id="@+id/orientation_sensor_row">
 
-        <ViewStub
-            android:id="@+id/include_orientation_sensor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout="@layout/type_orientation" />
+<!--         <include -->
+<!--             android:id="@+id/include_orientation_sensor" -->
+<!--             android:inflatedId="@+id/inflate_orientation_sensor" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             layout="@layout/type_orientation" /> -->
     </TableRow>
 
-    <TableRow>
+    <TableRow android:id="@+id/gyroscope_row">
 
-        <ViewStub
-            android:id="@+id/include_gyroscope"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout="@layout/type_gyroscope" />
+<!--         <include -->
+<!--             android:id="@+id/include_gyroscope" -->
+<!--             android:inflatedId="@+id/inflate_gyroscope" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             layout="@layout/type_gyroscope" /> -->
     </TableRow>
 
-    <TableRow>
+    <TableRow android:id="@+id/light_row">
 
-        <ViewStub
-            android:id="@+id/include_light"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout="@layout/type_light" />
+<!--         <include -->
+<!--             android:id="@+id/include_light" -->
+<!--             android:inflatedId="@+id/inflate_light" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             layout="@layout/type_light" /> -->
     </TableRow>
 
-    <TableRow>
+    <TableRow android:id="@+id/pressure_row">
 
-        <ViewStub
-            android:id="@+id/include_pressure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout="@layout/type_pressure" />
+<!--         <include -->
+<!--             android:id="@+id/include_pressure" -->
+<!--             android:inflatedId="@+id/inflate_pressure" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             layout="@layout/type_pressure" /> -->
     </TableRow>
 
-    <TableRow>
+    <TableRow android:id="@+id/temperature_row">
 
-        <ViewStub
-            android:id="@+id/include_temperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout="@layout/type_temperature" />
+<!--         <include -->
+<!--             android:id="@+id/include_temperature" -->
+<!--             android:inflatedId="@+id/inflate_temperature" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             layout="@layout/type_temperature" /> -->
     </TableRow>
 
-    <TableRow>
+    <TableRow android:id="@+id/proximity_row">
 
-        <ViewStub
-            android:id="@+id/include_proximity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout="@layout/type_proximity" />
+<!--         <include -->
+<!--             android:id="@+id/include_proximity" -->
+<!--             android:inflatedId="@+id/inflate_proximity" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             layout="@layout/type_proximity" /> -->
     </TableRow>
 
-    <TableRow>
+    <TableRow android:id="@+id/gravity_row">
 
-        <ViewStub
-            android:id="@+id/include_gravity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout="@layout/type_gravity" />
+<!--         <include -->
+<!--             android:id="@+id/include_gravity" -->
+<!--             android:inflatedId="@+id/inflate_gravity" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             layout="@layout/type_gravity" /> -->
     </TableRow>
 
-    <TableRow>
+    <TableRow android:id="@+id/linear_acceleration_row">
 
-        <ViewStub
-            android:id="@+id/include_linear_acceleration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout="@layout/type_linear_acceleration" />
+<!--         <include -->
+<!--             android:id="@+id/include_linear_acceleration" -->
+<!--             android:inflatedId="@+id/inflate_linear_acceleration" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             layout="@layout/type_linear_acceleration" /> -->
     </TableRow>
 
-    <TableRow>
+    <TableRow android:id="@+id/rotation_vector_row">
 
-        <ViewStub
-            android:id="@+id/include_rotation_vector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout="@layout/type_rotation_vector" />
+<!--         <include -->
+<!--             android:id="@+id/include_rotation_vector" -->
+<!--             android:inflatedId="@+id/inflate_rotation_vector" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             layout="@layout/type_rotation_vector" /> -->
     </TableRow>
 
-    <TableRow>
+    <TableRow android:id="@+id/relative_humidity_row">
 
-        <ViewStub
-            android:id="@+id/include_relative_humidity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout="@layout/type_relative_humidity" />
+<!--         <include -->
+<!--             android:id="@+id/include_relative_humidity" -->
+<!--             android:inflatedId="@+id/inflate_relative_humidity" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             layout="@layout/type_relative_humidity" /> -->
     </TableRow>
 
-    <TableRow>
+    <TableRow android:id="@+id/ambient_temperature_row">
 
-        <ViewStub
-            android:id="@+id/include_ambient_temperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout="@layout/type_ambient_temperature" />
+<!--         <include -->
+<!--             android:id="@+id/include_ambient_temperature" -->
+<!--             android:inflatedId="@+id/inflate_ambient_temperature" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             layout="@layout/type_ambient_temperature" /> -->
     </TableRow>
 
 </TableLayout>

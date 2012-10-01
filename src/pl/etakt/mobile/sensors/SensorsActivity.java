@@ -13,6 +13,7 @@ import android.hardware.Sensor;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
@@ -109,6 +110,8 @@ public class SensorsActivity extends Activity {
 	}
 
 	private void initiate_internals() {
+		Log.i(TAG, "initiate_internals() in " + getClass().getCanonicalName());
+		
 		mySensorsManager = new MySensorsManager(instance);
 		mySensorsManager.initiate();
 
@@ -120,6 +123,12 @@ public class SensorsActivity extends Activity {
 
 	@SuppressLint("ParserError")
 	private void setComponentsGui() {
+		
+		Log.i(TAG, "setComponentsGui() in " + getClass().getCanonicalName());
+		
+		final LayoutInflater  inflater = 
+				(LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        
 		for (Sensor s : listSensors) {
 			switch (s.getType()) {
 			case Sensor.TYPE_ACCELEROMETER:
@@ -128,13 +137,15 @@ public class SensorsActivity extends Activity {
 				// layout.setVisibility(View.VISIBLE);
 
 				if (FIRST_METHOD_INFLATE)
-					((ViewStub) findViewById(R.id.include_accelerometer))
-							.setVisibility(View.VISIBLE);
+					/*((ViewStub) findViewById(R.id.include_accelerometer))
+							.setVisibility(View.VISIBLE);*/;
 				else {
 					/*View importPanel1 = ((ViewStub) findViewById(R.id.include_accelerometer))
 							.inflate();*/
-					ListView importPanel1 = ((ListView) findViewById(R.id.list_view_accelerometer));
-					
+					//ListView importPanel1 = ((ListView) findViewById(R.id.list_view_accelerometer));
+					View b = (View) inflater.inflate(R.layout.type_accelerometer,
+			                null);
+					layout.addView(b);
 				}
 
 				break;
@@ -143,11 +154,14 @@ public class SensorsActivity extends Activity {
 				// layout9.setVisibility(View.VISIBLE);
 
 				if (FIRST_METHOD_INFLATE)
-					((ViewStub) findViewById(R.id.include_gravity))
-							.setVisibility(View.VISIBLE);
+					/*((ViewStub) findViewById(R.id.include_gravity))
+							.setVisibility(View.VISIBLE)*/;
 				else {
-					View importPanel9 = ((ViewStub) findViewById(R.id.include_gravity))
-							.inflate();
+					/*View importPanel9 = ((ViewStub) findViewById(R.id.include_gravity))
+							.inflate();*/
+					View b = (View) inflater.inflate(R.layout.type_gravity,
+			                null);
+					layout.addView(b);
 				}
 
 				break;
@@ -156,11 +170,15 @@ public class SensorsActivity extends Activity {
 				//layout4.setVisibility(View.VISIBLE);
 				
 				if (FIRST_METHOD_INFLATE)
-					((ViewStub) findViewById(R.id.include_gyroscope))
-							.setVisibility(View.VISIBLE);
+//					((ViewStub) findViewById(R.id.include_gyroscope))
+//							.setVisibility(View.VISIBLE);
+					;
 				else {
-					View importPanel4 = ((ViewStub) findViewById(R.id.include_gyroscope))
-							.inflate();
+//					View importPanel4 = ((ViewStub) findViewById(R.id.include_gyroscope))
+//							.inflate();
+					View b = (View) inflater.inflate(R.layout.type_gyroscope,
+			                null);
+					layout.addView(b);
 				}
 				
 				break;
@@ -169,11 +187,15 @@ public class SensorsActivity extends Activity {
 				//layout5.setVisibility(View.VISIBLE);
 				
 				if (FIRST_METHOD_INFLATE)
-					((ViewStub) findViewById(R.id.include_light))
-							.setVisibility(View.VISIBLE);
+//					((ViewStub) findViewById(R.id.include_light))
+//							.setVisibility(View.VISIBLE);
+					;
 				else {
-					View importPanel5 = ((ViewStub) findViewById(R.id.include_light))
-							.inflate();
+//					View importPanel5 = ((ViewStub) findViewById(R.id.include_light))
+//							.inflate();
+					View b = (View) inflater.inflate(R.layout.type_light,
+			                null);
+					layout.addView(b);
 				}
 				
 				break;
@@ -182,11 +204,15 @@ public class SensorsActivity extends Activity {
 				//layout10.setVisibility(View.VISIBLE);
 				
 				if (FIRST_METHOD_INFLATE)
-					((ViewStub) findViewById(R.id.include_linear_acceleration))
-							.setVisibility(View.VISIBLE);
+//					((ViewStub) findViewById(R.id.include_linear_acceleration))
+//							.setVisibility(View.VISIBLE);
+					;
 				else {
-					View importPanel10 = ((ViewStub) findViewById(R.id.include_linear_acceleration))
-							.inflate();
+//					View importPanel10 = ((ViewStub) findViewById(R.id.include_linear_acceleration))
+//							.inflate();
+					View b = (View) inflater.inflate(R.layout.type_linear_acceleration,
+			                null);
+					layout.addView(b);
 				}
 				
 				break;
@@ -195,11 +221,14 @@ public class SensorsActivity extends Activity {
 				//layout2.setVisibility(View.VISIBLE);
 				
 				if (FIRST_METHOD_INFLATE)
-					((ViewStub) findViewById(R.id.include_magneticfield))
-							.setVisibility(View.VISIBLE);
+					/*((ViewStub) findViewById(R.id.include_magneticfield))
+							.setVisibility(View.VISIBLE)*/;
 				else {
-					View importPanel2 = ((ViewStub) findViewById(R.id.include_magneticfield))
-							.inflate();
+					/*View importPanel2 = ((ViewStub) findViewById(R.id.include_magneticfield))
+							.inflate();*/
+					View b = (View) inflater.inflate(R.layout.type_magneticfield,
+			                null);
+					layout.addView(b);
 				}
 				
 				break;
@@ -208,11 +237,14 @@ public class SensorsActivity extends Activity {
 				//layout3.setVisibility(View.VISIBLE);
 				
 				if (FIRST_METHOD_INFLATE)
-					((ViewStub) findViewById(R.id.include_orientation_sensor))
-							.setVisibility(View.VISIBLE);
+					/*((ViewStub) findViewById(R.id.include_orientation_sensor))
+							.setVisibility(View.VISIBLE)*/;
 				else {
-					View importPanel3 = ((ViewStub) findViewById(R.id.include_orientation_sensor))
-							.inflate();
+					/*View importPanel3 = ((ViewStub) findViewById(R.id.include_orientation_sensor))
+							.inflate();*/
+					View b = (View) inflater.inflate(R.layout.type_orientation,
+			                null);
+					layout.addView(b);
 				}
 				
 				break;
@@ -221,32 +253,52 @@ public class SensorsActivity extends Activity {
 				//layout6.setVisibility(View.VISIBLE);
 				
 				if (FIRST_METHOD_INFLATE)
-					((ViewStub) findViewById(R.id.include_pressure))
-							.setVisibility(View.VISIBLE);
+					/*((ViewStub) findViewById(R.id.include_pressure))
+							.setVisibility(View.VISIBLE)*/;
 				else {
-					View importPanel6 = ((ViewStub) findViewById(R.id.include_pressure))
-							.inflate();
+					View b = (View) inflater.inflate(R.layout.type_pressure,
+			                null);
+					layout.addView(b);
+				}
+				
+				break;
+			case Sensor.TYPE_PROXIMITY:
+				//View layout6 = (View) findViewById(R.id.include_pressure);
+				//layout6.setVisibility(View.VISIBLE);
+				
+				if (FIRST_METHOD_INFLATE)
+					/*((ViewStub) findViewById(R.id.include_pressure))
+							.setVisibility(View.VISIBLE)*/;
+				else {
+					View b = (View) inflater.inflate(R.layout.type_proximity,
+			                null);
+					layout.addView(b);
 				}
 				
 				break;
 			default:
+				Log.e(TAG, "Default case !!!");
 				break;
 			}
 		}
 	}
 
 	private void setComponentsActions() {
+		Log.i(TAG, "setComponentsActions() in SensorsActivity called");
 		;
 	}
 
 	@Override
 	public void onPause() {
+		Log.i(TAG, "onPause() in SensorsActivity called");
 		super.onPause();
 	}
 
 	@Override
 	public void onDestroy() {
+		Log.i(TAG, "onDestroy() in SensorsActivity called");
 		if (adView != null) {
+			Log.i(TAG, "adView != null");
 			adView.destroy();
 		}
 		super.onDestroy();
