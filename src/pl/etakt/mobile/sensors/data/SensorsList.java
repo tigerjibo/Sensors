@@ -5,6 +5,8 @@ import java.util.List;
 import pl.etakt.mobile.sensors.R;
 import pl.etakt.mobile.sensors.SensorsActivity;
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
 
@@ -54,6 +56,28 @@ public class SensorsList {
 	    
 	    for(Sensor s : msensorList){
 	    	Log.d(TAG, "!! name s: " + s.getName());
+	    	Log.d(TAG, "!! type s: " + s.getType());
+	    }
+	}
+	
+	public void init_listeners(){
+		
+		SensorEventListener sel = new SensorEventListener(){
+			public void onAccuracyChanged(Sensor sensor, int accuracy) {
+				/* Isn't required for this example */
+
+			}
+			public void onSensorChanged(SensorEvent event) {
+				/* Write the accelerometer values to the TextView */
+				float[] values = event.values;
+				//accText.setText("x: "+values[0]+"\ny: "+values[1]+"\nz: "+values[2]);
+			}
+
+		};
+		
+		for(Sensor s : msensorList){
+	    	Log.d(TAG, "!! name s: " + s.getName() + " registering listeners...");
+	    	mSensorManager.registerListener(sel, s, SensorManager.SENSOR_DELAY_NORMAL);
 	    	Log.d(TAG, "!! type s: " + s.getType());
 	    }
 	}
