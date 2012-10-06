@@ -1,9 +1,10 @@
-package pl.etakt.mobile.sensors.data;
+package pl.etakt.mobile.sensors.audio;
 
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.AudioRecord.OnRecordPositionUpdateListener;
 import android.media.MediaRecorder.AudioSource;
+import android.util.Log;
 
 public class AverageNoise {
 	
@@ -12,6 +13,13 @@ public class AverageNoise {
 	private short[][] buffers = new short[256][bufferSize];
 	private int[] averages = new int[256];
 	private int lastBuffer = 0;
+	
+	private static String TAG = "AverageNoise";
+	
+	public AverageNoise (){
+		
+		Log.d(TAG, "AverageNoise object created");
+	}
 	
 	protected AudioRecord recorder;
 	private boolean recorderStarted;

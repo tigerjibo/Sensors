@@ -1,4 +1,4 @@
-package pl.etakt.mobile.sensors.data;
+package pl.etakt.mobile.sensors.audio;
 
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;

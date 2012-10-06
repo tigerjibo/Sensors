@@ -2,6 +2,7 @@ package pl.etakt.mobile.sensors;
 
 import java.util.List;
 
+import pl.etakt.mobile.sensors.audio.AverageNoise;
 import pl.etakt.mobile.sensors.data.MySensorsManager;
 import pl.etakt.mobile.sensors.data.SensorsList;
 import pl.etakt.mobile.sensors.engine.AdMobShared;
@@ -37,15 +38,20 @@ public class SensorsActivity extends Activity {
 
 	private static final String TAG = "SensorsActivity";
 
+	/*************************************************
+	 * Hardware classes, Sensors management
+	 * @author Oskar
+	 * @since 1.0
+	 *************************************************/
 	protected MySensorsManager mySensorsManager;
 	private SensorsList list;
 	private List<Sensor> listSensors;
+	private AverageNoise averageNoise;
 
 	private DrawableFactory drawableFactory;
-
 	private ScreenSize screenSize;
 
-	protected SensorsActivity instance;
+	protected static SensorsActivity instance;
 
 	private TableLayout layout;
 
@@ -61,7 +67,17 @@ public class SensorsActivity extends Activity {
 
 	private int SCREEN_HEIGHT;
 	
-	TextView sensors_text_accelerometer;
+	private TextView sensors_text_accelerometer;
+	private TextView sensors_text_gravity;
+	private TextView sensors_text_gyroscope;
+	private TextView sensors_text_light;
+	private TextView sensors_text_linear_acceleration;
+	private TextView sensors_text_magnetic_field;
+	private TextView sensors_text_orientation;
+	private TextView sensors_text_pressure;
+	private TextView sensors_text_proximity;
+
+	private boolean INCLUDE_NOISE_METER = true;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -131,7 +147,8 @@ public class SensorsActivity extends Activity {
 	}
 
 	private void initiate_factories() {
-
+		Log.d(TAG, "initiate_factories() launched in " + getClass().getCanonicalName());
+		
 		drawableFactory = new DrawableFactory(getPackageName());
 
 		screenSize = new ScreenSize(getWindowManager().getDefaultDisplay());
@@ -144,23 +161,36 @@ public class SensorsActivity extends Activity {
 	private void initiate_internals() {
 		Log.i(TAG, "initiate_internals() in " + getClass().getCanonicalName());
 
+		//TO DO: it will be a bridge-container after SensorsList initiated
+		// the sensors will be held below
 		mySensorsManager = new MySensorsManager(instance);
-		mySensorsManager.initiate();
+		mySensorsManager.initiate(); // initiating manager
 
 		list = new SensorsList(instance);
-		list.init();
+		list.init(); // initing sensors
+		list.init_listeners(); // initing sensors listeners
 
-		list.init_listeners();
-
-		listSensors = list.get_sensors_list();
+		listSensors = list.getSensorList(); // getting sensor list
+		
+		averageNoise = new AverageNoise();
 	}
 
-	static Handler updater1 = new Handler() {
+	protected static Handler catUpdater = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
+			float[] values = (float[]) msg.obj;
 			switch (msg.what) {
 			case Sensor.TYPE_ACCELEROMETER:
-
+				instance.sensors_text_accelerometer.setText("" + values[0] + " " + values[1] + " " + values[2]);
+				break;
+			case Sensor.TYPE_MAGNETIC_FIELD:
+				instance.sensors_text_magnetic_field.setText("" + values[0] + " " + values[1] + " " + values[2]);
+				break;
+			case Sensor.TYPE_ORIENTATION:
+				instance.sensors_text_orientation.setText("" + values[0] + " " + values[1] + " " + values[2]);
+				break;
+			case Sensor.TYPE_PROXIMITY:
+				instance.sensors_text_proximity.setText("" + values[0] + " " + values[1] + " " + values[2]);
 				break;
 			default:
 
@@ -168,6 +198,10 @@ public class SensorsActivity extends Activity {
 			}
 		}
 	};
+	
+	public static Handler getUpdater(){
+		return catUpdater;
+	}
 
 	@SuppressLint("ParserError")
 	private void setComponentsGui() {
@@ -182,9 +216,7 @@ public class SensorsActivity extends Activity {
 		for (Sensor s : listSensors) {
 			switch (s.getType()) {
 			case Sensor.TYPE_ACCELEROMETER:
-				// View layout1 = (View)
-				// findViewById(R.id.include_accelerometer);
-				// layout.setVisibility(View.VISIBLE);
+
 				Log.i(TAG, "case Sensor.TYPE_ACCELEROMETER");
 
 				if (FIRST_METHOD_INFLATE)
@@ -193,12 +225,7 @@ public class SensorsActivity extends Activity {
 					 * .setVisibility(View.VISIBLE);
 					 */;
 				else {
-					/*
-					 * View importPanel1 = ((ViewStub)
-					 * findViewById(R.id.include_accelerometer)) .inflate();
-					 */
-					// ListView importPanel1 = ((ListView)
-					// findViewById(R.id.list_view_accelerometer));
+
 					View b = (View) inflater.inflate(
 							R.layout.type_accelerometer, null);
 					ImageView image = ((ImageView) b
@@ -221,8 +248,7 @@ public class SensorsActivity extends Activity {
 
 				break;
 			case Sensor.TYPE_GRAVITY:
-				// View layout9 = (View) findViewById(R.id.include_gravity);
-				// layout9.setVisibility(View.VISIBLE);
+
 				Log.i(TAG, "case Sensor.TYPE_GRAVITY:");
 
 				if (FIRST_METHOD_INFLATE)
@@ -231,10 +257,7 @@ public class SensorsActivity extends Activity {
 					 * .setVisibility(View.VISIBLE)
 					 */;
 				else {
-					/*
-					 * View importPanel9 = ((ViewStub)
-					 * findViewById(R.id.include_gravity)) .inflate();
-					 */
+
 					View b = (View) inflater.inflate(R.layout.type_gravity,
 							null);
 					ImageView image = ((ImageView) b
@@ -248,14 +271,16 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
+					
+					sensors_text_gravity = ((TextView) b
+							.findViewById(R.id.sensors_text_gravity));
 
 					layout.addView(b);
 				}
 
 				break;
 			case Sensor.TYPE_GYROSCOPE:
-				// View layout4 = (View) findViewById(R.id.include_gyroscope);
-				// layout4.setVisibility(View.VISIBLE);
+
 				Log.i(TAG, "case Sensor.TYPE_GYROSCOPE:");
 
 				if (FIRST_METHOD_INFLATE)
@@ -263,9 +288,7 @@ public class SensorsActivity extends Activity {
 					// .setVisibility(View.VISIBLE);
 					;
 				else {
-					// View importPanel4 = ((ViewStub)
-					// findViewById(R.id.include_gyroscope))
-					// .inflate();
+
 					View b = (View) inflater.inflate(R.layout.type_gyroscope,
 							null);
 					ImageView image = ((ImageView) b
@@ -279,14 +302,16 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
+					
+					sensors_text_gyroscope = ((TextView) b
+							.findViewById(R.id.sensors_text_gyroscope));
 
 					layout.addView(b);
 				}
 
 				break;
 			case Sensor.TYPE_LIGHT:
-				// View layout5 = (View) findViewById(R.id.include_light);
-				// layout5.setVisibility(View.VISIBLE);
+
 				Log.i(TAG, "case Sensor.TYPE_LIGHT:");
 
 				if (FIRST_METHOD_INFLATE)
@@ -294,9 +319,7 @@ public class SensorsActivity extends Activity {
 					// .setVisibility(View.VISIBLE);
 					;
 				else {
-					// View importPanel5 = ((ViewStub)
-					// findViewById(R.id.include_light))
-					// .inflate();
+
 					View b = (View) inflater.inflate(R.layout.type_light, null);
 					ImageView image = ((ImageView) b
 							.findViewById(R.id.icon_light));
@@ -309,15 +332,16 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
+					
+					sensors_text_light = ((TextView) b
+							.findViewById(R.id.sensors_text_light));
 
 					layout.addView(b);
 				}
 
 				break;
 			case Sensor.TYPE_LINEAR_ACCELERATION:
-				// View layout10 = (View)
-				// findViewById(R.id.include_linear_acceleration);
-				// layout10.setVisibility(View.VISIBLE);
+
 				Log.i(TAG, "case Sensor.TYPE_LINEAR_ACCELERATION:");
 
 				if (FIRST_METHOD_INFLATE)
@@ -326,9 +350,7 @@ public class SensorsActivity extends Activity {
 					// .setVisibility(View.VISIBLE);
 					;
 				else {
-					// View importPanel10 = ((ViewStub)
-					// findViewById(R.id.include_linear_acceleration))
-					// .inflate();
+
 					View b = (View) inflater.inflate(
 							R.layout.type_linear_acceleration, null);
 					ImageView image = ((ImageView) b
@@ -342,15 +364,16 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
+					
+					sensors_text_linear_acceleration = ((TextView) b
+							.findViewById(R.id.sensors_text_linear_acceleration));
 
 					layout.addView(b);
 				}
 
 				break;
 			case Sensor.TYPE_MAGNETIC_FIELD:
-				// View layout2 = (View)
-				// findViewById(R.id.include_magneticfield);
-				// layout2.setVisibility(View.VISIBLE);
+
 				Log.i(TAG, "case Sensor.TYPE_MAGNETIC_FIELD:");
 
 				if (FIRST_METHOD_INFLATE)
@@ -359,10 +382,7 @@ public class SensorsActivity extends Activity {
 					 * .setVisibility(View.VISIBLE)
 					 */;
 				else {
-					/*
-					 * View importPanel2 = ((ViewStub)
-					 * findViewById(R.id.include_magneticfield)) .inflate();
-					 */
+
 					View b = (View) inflater.inflate(
 							R.layout.type_magneticfield, null);
 					ImageView image = ((ImageView) b
@@ -376,15 +396,16 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
+					
+					sensors_text_magnetic_field = ((TextView) b
+							.findViewById(R.id.sensors_text_magneticfield));
 
 					layout.addView(b);
 				}
 
 				break;
 			case Sensor.TYPE_ORIENTATION:
-				// View layout3 = (View)
-				// findViewById(R.id.include_orientation_sensor);
-				// layout3.setVisibility(View.VISIBLE);
+
 				Log.i(TAG, "case Sensor.TYPE_ORIENTATION:");
 
 				if (FIRST_METHOD_INFLATE)
@@ -394,11 +415,7 @@ public class SensorsActivity extends Activity {
 					 * .setVisibility(View.VISIBLE)
 					 */;
 				else {
-					/*
-					 * View importPanel3 = ((ViewStub)
-					 * findViewById(R.id.include_orientation_sensor))
-					 * .inflate();
-					 */
+					
 					View b = (View) inflater.inflate(R.layout.type_orientation,
 							null);
 					ImageView image = ((ImageView) b
@@ -412,14 +429,16 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
+					
+					sensors_text_orientation = ((TextView) b
+							.findViewById(R.id.sensors_text_orientation));
 
 					layout.addView(b);
 				}
 
 				break;
 			case Sensor.TYPE_PRESSURE:
-				// View layout6 = (View) findViewById(R.id.include_pressure);
-				// layout6.setVisibility(View.VISIBLE);
+
 				Log.i(TAG, "case Sensor.TYPE_PRESSURE:");
 
 				if (FIRST_METHOD_INFLATE)
@@ -441,14 +460,16 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
+					
+					sensors_text_pressure = ((TextView) b
+							.findViewById(R.id.sensors_text_pressure));
 
 					layout.addView(b);
 				}
 
 				break;
 			case Sensor.TYPE_PROXIMITY:
-				// View layout6 = (View) findViewById(R.id.include_pressure);
-				// layout6.setVisibility(View.VISIBLE);
+
 				Log.i(TAG, "case Sensor.TYPE_PROXIMITY");
 
 				if (FIRST_METHOD_INFLATE)
@@ -470,6 +491,9 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
+					
+					sensors_text_proximity = ((TextView) b
+							.findViewById(R.id.sensors_text_proximity));
 
 					layout.addView(b);
 				}
@@ -478,6 +502,34 @@ public class SensorsActivity extends Activity {
 			default:
 				Log.e(TAG, "Default case !!!");
 				break;
+			}
+		}
+		
+		if (INCLUDE_NOISE_METER ){
+
+			Log.i(TAG, "INCLUDE_NOISE_METER");
+
+			if (FIRST_METHOD_INFLATE)
+				/*
+				 * ((ViewStub) findViewById(R.id.include_pressure))
+				 * .setVisibility(View.VISIBLE)
+				 */;
+			else {
+				View b = (View) inflater.inflate(R.layout.type_sound_intensivity,
+						null);
+				ImageView image = ((ImageView) b
+						.findViewById(R.id.icon_sound_intensivity));
+
+				Drawable d = drawableFactory.getDrawable(image,
+						getResources());
+				Drawable n = drawableFactory.resize(d, w, h);
+
+				image.setImageDrawable(n);
+
+				image.setMaxHeight(h);
+				image.setMaxWidth(w);
+
+				layout.addView(b);
 			}
 		}
 	}
