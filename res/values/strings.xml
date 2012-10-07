@@ -29,6 +29,7 @@
     <string name="relative_humidity">Relative humidity</string>
     <string name="roation_vector">Rotation vector</string>
     <string name="temperature">Temperature</string>
+    <string name="sound_intensivity">Temperature</string>
     <string name="value">Value</string>
     <string name="values">Values</string>
     <string name="dex_crc">78541454</string>

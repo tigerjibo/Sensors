@@ -23,6 +23,8 @@ public class MySensorsManager {
 	private Sensor ROTATION_VECTOR = null;
 	private Sensor TEMPERATURE = null;
 	
+	private static int CUSTOM_LIGHT_SENSOR = -10;
+	
 	private Object SOUND_SENSOR = null;
 	
 	private static final String TAG = "MySensorsManager";
@@ -231,6 +233,20 @@ public class MySensorsManager {
 	 */
 	public void setSOUND_SENSOR(Object sOUND_SENSOR) {
 		SOUND_SENSOR = sOUND_SENSOR;
+	}
+
+	/**
+	 * @return the cUSTOM_LIGHT_SENSOR
+	 */
+	public static int getCUSTOM_LIGHT_SENSOR() {
+		return CUSTOM_LIGHT_SENSOR;
+	}
+
+	/**
+	 * @param cUSTOM_LIGHT_SENSOR the cUSTOM_LIGHT_SENSOR to set
+	 */
+	public static void setCUSTOM_LIGHT_SENSOR(int cUSTOM_LIGHT_SENSOR) {
+		CUSTOM_LIGHT_SENSOR = cUSTOM_LIGHT_SENSOR;
 	}
 
 

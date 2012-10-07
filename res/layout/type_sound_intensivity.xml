@@ -25,7 +25,7 @@
             android:layout_height="0dip"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="Accelerometer" />
+            android:text="@string/sound_intensivity" />
 
         <TextView
             android:id="@+id/sensors_text_sound"

@@ -25,9 +25,13 @@ import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.ads.AdRequest;
@@ -40,6 +44,7 @@ public class SensorsActivity extends Activity {
 
 	/*************************************************
 	 * Hardware classes, Sensors management
+	 * 
 	 * @author Oskar
 	 * @since 1.0
 	 *************************************************/
@@ -54,6 +59,25 @@ public class SensorsActivity extends Activity {
 	protected static SensorsActivity instance;
 
 	private TableLayout layout;
+	private ScrollView scrollViewMain;
+	private RelativeLayout mainRelativeLayout;
+
+	private TableRow acceleratorRow;
+	private TableRow magneticfieldRow;
+	private TableRow orientationSensorRow;
+	private TableRow gyroscopeRow;
+	private TableRow lightRow;
+	private TableRow pressureRow;
+	private TableRow temperatureRow;
+	private TableRow proximityRow;
+	private TableRow gravityRow;
+	private TableRow linearAccelerationRow;
+	private TableRow rotationvectorRow;
+	private TableRow relativeHumidityRow;
+	private TableRow ambientTemperatureRow;
+	private TableRow soundRow;
+
+	private static final int LIGHT_SENSOR = -10;
 
 	private TelephonyManager tm;
 	private String deviceid;
@@ -66,7 +90,7 @@ public class SensorsActivity extends Activity {
 	private int SCREEN_WIDTH;
 
 	private int SCREEN_HEIGHT;
-	
+
 	private TextView sensors_text_accelerometer;
 	private TextView sensors_text_gravity;
 	private TextView sensors_text_gyroscope;
@@ -76,6 +100,10 @@ public class SensorsActivity extends Activity {
 	private TextView sensors_text_orientation;
 	private TextView sensors_text_pressure;
 	private TextView sensors_text_proximity;
+	private TextView sensors_text_temperature;
+	private TextView sensors_text_rotation_vector;
+
+	private Button exitApplicationButton;
 
 	private boolean INCLUDE_NOISE_METER = true;
 
@@ -103,10 +131,7 @@ public class SensorsActivity extends Activity {
 
 		initiate_factories();
 
-		// Lookup your LinearLayout assuming it’s been given
-		// the attribute android:id="@+id/mainLayout"
-		layout = (TableLayout) findViewById(R.id.main_linear_layout);
-
+		setComponentsReferences();
 		setComponentsGui();
 		setComponentsActions();
 
@@ -126,7 +151,7 @@ public class SensorsActivity extends Activity {
 		adView = new AdView(this, AdSize.BANNER, ADMOB_UNIT_ID);
 
 		// Add the adView to it
-		layout.addView(adView);
+		mainRelativeLayout.addView(adView);
 
 		AdRequest adRequest = new AdRequest();
 
@@ -147,8 +172,9 @@ public class SensorsActivity extends Activity {
 	}
 
 	private void initiate_factories() {
-		Log.d(TAG, "initiate_factories() launched in " + getClass().getCanonicalName());
-		
+		Log.d(TAG, "initiate_factories() launched in "
+				+ getClass().getCanonicalName());
+
 		drawableFactory = new DrawableFactory(getPackageName());
 
 		screenSize = new ScreenSize(getWindowManager().getDefaultDisplay());
@@ -161,7 +187,7 @@ public class SensorsActivity extends Activity {
 	private void initiate_internals() {
 		Log.i(TAG, "initiate_internals() in " + getClass().getCanonicalName());
 
-		//TO DO: it will be a bridge-container after SensorsList initiated
+		// TO DO: it will be a bridge-container after SensorsList initiated
 		// the sensors will be held below
 		mySensorsManager = new MySensorsManager(instance);
 		mySensorsManager.initiate(); // initiating manager
@@ -171,36 +197,97 @@ public class SensorsActivity extends Activity {
 		list.init_listeners(); // initing sensors listeners
 
 		listSensors = list.getSensorList(); // getting sensor list
-		
+
 		averageNoise = new AverageNoise();
 	}
 
 	protected static Handler catUpdater = new Handler() {
+
 		@Override
 		public void handleMessage(Message msg) {
 			float[] values = (float[]) msg.obj;
 			switch (msg.what) {
 			case Sensor.TYPE_ACCELEROMETER:
-				instance.sensors_text_accelerometer.setText("" + values[0] + " " + values[1] + " " + values[2]);
+				instance.sensors_text_accelerometer.setText("" + values[0]
+						+ " " + values[1] + " " + values[2]);
 				break;
 			case Sensor.TYPE_MAGNETIC_FIELD:
-				instance.sensors_text_magnetic_field.setText("" + values[0] + " " + values[1] + " " + values[2]);
+				instance.sensors_text_magnetic_field.setText("" + values[0]
+						+ " " + values[1] + " " + values[2]);
+				break;
+			case Sensor.TYPE_LINEAR_ACCELERATION:
+				instance.sensors_text_linear_acceleration.setText(""
+						+ values[0] + " " + values[1] + " " + values[2]);
 				break;
 			case Sensor.TYPE_ORIENTATION:
-				instance.sensors_text_orientation.setText("" + values[0] + " " + values[1] + " " + values[2]);
+				instance.sensors_text_orientation.setText("" + values[0] + " "
+						+ values[1] + " " + values[2]);
 				break;
 			case Sensor.TYPE_PROXIMITY:
-				instance.sensors_text_proximity.setText("" + values[0] + " " + values[1] + " " + values[2]);
+				instance.sensors_text_proximity.setText("" + values[0] + " "
+						+ values[1] + " " + values[2]);
+				break;
+			case Sensor.TYPE_TEMPERATURE:
+				instance.sensors_text_temperature.setText("" + values[0] + " "
+						+ values[1] + " " + values[2]);
+				break;
+			case Sensor.TYPE_GRAVITY:
+				instance.sensors_text_gravity.setText("" + values[0] + " "
+						+ values[1] + " " + values[2]);
+				break;
+			case Sensor.TYPE_GYROSCOPE:
+				instance.sensors_text_gyroscope.setText("" + values[0] + " "
+						+ values[1] + " " + values[2]);
+				break;
+			case Sensor.TYPE_PRESSURE:
+				instance.sensors_text_pressure.setText("" + values[0] + " "
+						+ values[1] + " " + values[2]);
+				break;
+			case Sensor.TYPE_ROTATION_VECTOR:
+				instance.sensors_text_rotation_vector.setText("" + values[0]
+						+ " " + values[1] + " " + values[2]);
+				break;
+			case LIGHT_SENSOR:
+				instance.sensors_text_light.setText("" + values[0] + " "
+						+ values[1] + " " + values[2]);
 				break;
 			default:
-
+				Log.e(TAG, "Something wrong, default case in messanger receive");
 				break;
 			}
 		}
 	};
-	
-	public static Handler getUpdater(){
+
+	public static Handler getUpdater() {
+		Log.e(TAG, "getUpdater called");
 		return catUpdater;
+	}
+
+	private void setComponentsReferences() {
+		Log.d(TAG, "setComponentsReferences() lunched");
+
+		// Lookup your LinearLayout assuming it’s been given
+		// the attribute android:id="@+id/mainLayout"
+		layout = (TableLayout) findViewById(R.id.main_linear_layout);
+		scrollViewMain = (ScrollView) findViewById(R.id.ScrollViewMain);
+		mainRelativeLayout = (RelativeLayout) findViewById(R.id.main_relative_layout);
+
+		acceleratorRow = ((TableRow) findViewById(R.id.accelerometer_row));
+		magneticfieldRow = ((TableRow) findViewById(R.id.magneticfield_row));
+		orientationSensorRow = ((TableRow) findViewById(R.id.orientation_sensor_row));
+		gyroscopeRow = ((TableRow) findViewById(R.id.gyroscope_row));
+		lightRow = ((TableRow) findViewById(R.id.light_row));
+		pressureRow = ((TableRow) findViewById(R.id.pressure_row));
+		temperatureRow = ((TableRow) findViewById(R.id.temperature_row));
+		proximityRow = ((TableRow) findViewById(R.id.proximity_row));
+		gravityRow = ((TableRow) findViewById(R.id.gravity_row));
+		linearAccelerationRow = ((TableRow) findViewById(R.id.linear_acceleration_row));
+		rotationvectorRow = ((TableRow) findViewById(R.id.rotation_vector_row));
+		relativeHumidityRow = ((TableRow) findViewById(R.id.relative_humidity_row));
+		ambientTemperatureRow = ((TableRow) findViewById(R.id.ambient_temperature_row));
+		soundRow = ((TableRow) findViewById(R.id.sound_row));
+
+		exitApplicationButton = (Button) findViewById(R.id.exitApplicationButton);
 	}
 
 	@SuppressLint("ParserError")
@@ -209,6 +296,7 @@ public class SensorsActivity extends Activity {
 		Log.i(TAG, "setComponentsGui() in " + getClass().getCanonicalName());
 
 		final LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		Log.i(TAG, "inflater service called");
 
 		int w = (int) (SCREEN_WIDTH * 0.3);
 		int h = (int) (SCREEN_HEIGHT * 0.2);
@@ -239,11 +327,12 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
-					
+
 					sensors_text_accelerometer = ((TextView) b
 							.findViewById(R.id.sensors_text_accelerometer));
 
-					layout.addView(b);
+					// layout.addView(b);
+					acceleratorRow.addView(b);
 				}
 
 				break;
@@ -271,11 +360,11 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
-					
+
 					sensors_text_gravity = ((TextView) b
 							.findViewById(R.id.sensors_text_gravity));
 
-					layout.addView(b);
+					gravityRow.addView(b);
 				}
 
 				break;
@@ -302,11 +391,11 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
-					
+
 					sensors_text_gyroscope = ((TextView) b
 							.findViewById(R.id.sensors_text_gyroscope));
 
-					layout.addView(b);
+					gyroscopeRow.addView(b);
 				}
 
 				break;
@@ -332,11 +421,11 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
-					
+
 					sensors_text_light = ((TextView) b
 							.findViewById(R.id.sensors_text_light));
 
-					layout.addView(b);
+					lightRow.addView(b);
 				}
 
 				break;
@@ -364,11 +453,11 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
-					
+
 					sensors_text_linear_acceleration = ((TextView) b
 							.findViewById(R.id.sensors_text_linear_acceleration));
 
-					layout.addView(b);
+					linearAccelerationRow.addView(b);
 				}
 
 				break;
@@ -396,11 +485,11 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
-					
+
 					sensors_text_magnetic_field = ((TextView) b
 							.findViewById(R.id.sensors_text_magneticfield));
 
-					layout.addView(b);
+					magneticfieldRow.addView(b);
 				}
 
 				break;
@@ -415,7 +504,7 @@ public class SensorsActivity extends Activity {
 					 * .setVisibility(View.VISIBLE)
 					 */;
 				else {
-					
+
 					View b = (View) inflater.inflate(R.layout.type_orientation,
 							null);
 					ImageView image = ((ImageView) b
@@ -429,11 +518,11 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
-					
+
 					sensors_text_orientation = ((TextView) b
 							.findViewById(R.id.sensors_text_orientation));
 
-					layout.addView(b);
+					orientationSensorRow.addView(b);
 				}
 
 				break;
@@ -460,11 +549,11 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
-					
+
 					sensors_text_pressure = ((TextView) b
 							.findViewById(R.id.sensors_text_pressure));
 
-					layout.addView(b);
+					pressureRow.addView(b);
 				}
 
 				break;
@@ -491,11 +580,11 @@ public class SensorsActivity extends Activity {
 
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
-					
+
 					sensors_text_proximity = ((TextView) b
 							.findViewById(R.id.sensors_text_proximity));
 
-					layout.addView(b);
+					proximityRow.addView(b);
 				}
 
 				break;
@@ -504,8 +593,8 @@ public class SensorsActivity extends Activity {
 				break;
 			}
 		}
-		
-		if (INCLUDE_NOISE_METER ){
+
+		if (INCLUDE_NOISE_METER) {
 
 			Log.i(TAG, "INCLUDE_NOISE_METER");
 
@@ -515,13 +604,12 @@ public class SensorsActivity extends Activity {
 				 * .setVisibility(View.VISIBLE)
 				 */;
 			else {
-				View b = (View) inflater.inflate(R.layout.type_sound_intensivity,
-						null);
+				View b = (View) inflater.inflate(
+						R.layout.type_sound_intensivity, null);
 				ImageView image = ((ImageView) b
 						.findViewById(R.id.icon_sound_intensivity));
 
-				Drawable d = drawableFactory.getDrawable(image,
-						getResources());
+				Drawable d = drawableFactory.getDrawable(image, getResources());
 				Drawable n = drawableFactory.resize(d, w, h);
 
 				image.setImageDrawable(n);
@@ -529,14 +617,26 @@ public class SensorsActivity extends Activity {
 				image.setMaxHeight(h);
 				image.setMaxWidth(w);
 
-				layout.addView(b);
+				soundRow.addView(b);
 			}
 		}
+		
+		exitApplicationButton.setMinWidth((int) (SCREEN_WIDTH * 0.7));
+		exitApplicationButton.setMaxWidth((int) (SCREEN_WIDTH * 0.7));
 	}
 
 	private void setComponentsActions() {
 		Log.i(TAG, "setComponentsActions() in SensorsActivity called");
-		;
+
+		exitApplicationButton.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				// exit application
+				finish();
+				if (Log.isLoggable(TAG, Log.INFO))
+					Log.i(TAG,
+							"User clicked Exit, Application called finish(). Goodbye.");
+			}
+		});
 	}
 
 	@Override
