@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/classic_menu_layout" >
+
+    <!--
+         Single menu item
+         Set id, icon and Title for each menu item
+    -->
+
+    <item
+        android:id="@+id/menu_tabs"
+        android:icon="@drawable/star1"
+        android:title="Chagne to tabs"/>
+
+    <item
+        android:id="@+id/menu_settings"
+        android:icon="@drawable/setting"
+        android:title="Options"/>
+
+    <item
+        android:id="@+id/menu_about"
+        android:icon="@drawable/help"
+        android:title="About"/>
+
+</menu>

@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:id="@+id/main_text_view_rotation_vector"        
             android:gravity="center_vertical"
-            android:text="rotation_vector" />
+            android:text="@string/roation_vector" />
             
         <TextView  
             android:layout_width="fill_parent"
@@ -34,7 +34,10 @@
             android:id="@+id/sensors_text_rotation_vector"
             android:singleLine="true"
             android:ellipsize="marquee"
-            android:text="---" />
+            android:text="---"
+            style="@style/TextStyle"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSize" />
             
     </LinearLayout>
     

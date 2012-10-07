@@ -51,6 +51,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity android:name=".tabs.AccelerometerActivity" />
+        <activity android:name=".tabs.MagneticActivity" />
+        <activity android:name=".tabs.OrientationActivity" />
+        <activity android:name=".tabs.ProximityActivity" />
+        <activity android:name=".tabs.PressureActivity" />
+        <activity android:name=".tabs.RotationVectorActivity" />
+        <activity android:name=".tabs.RelativeHumidityActivity" />
+        
+        <activity
+            android:label="@string/app_name"
+            android:name=".SensorsTabActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.EMBED" />
+            </intent-filter>
+        </activity>
+        
         <!-- And below is activity for AdMob library -->
 
         <activity

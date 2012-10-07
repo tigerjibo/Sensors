@@ -9,8 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_marginRight="6dip"
-        android:tag="accelerometer_icon_big"
-        android:src="@drawable/accelerometer_icon_big" />
+        android:src="@drawable/accelerometer_icon_big"
+        android:tag="accelerometer_icon_big" />
 
     <LinearLayout
         android:id="@+id/main_linear_layout_accelerometer"
@@ -25,7 +25,7 @@
             android:layout_height="0dip"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="Accelerometer" />
+            android:text="@string/accelerometer" />
 
         <TextView
             android:id="@+id/sensors_text_accelerometer"
@@ -34,7 +34,10 @@
             android:layout_weight="1"
             android:ellipsize="marquee"
             android:singleLine="true"
-            android:text="---" />
+            android:text="---"
+            style="@style/TextStyle"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSize" />
     </LinearLayout>
 
 </LinearLayout>

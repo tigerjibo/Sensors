@@ -34,7 +34,10 @@
             android:layout_weight="1"
             android:ellipsize="marquee"
             android:singleLine="true"
-            android:text="---" />
+            android:text="---"
+            style="@style/TextStyle"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSize" />
     </LinearLayout>
 
 </LinearLayout>

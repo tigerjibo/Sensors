@@ -12,6 +12,7 @@ import pl.etakt.mobile.sensors.engine.ScreenSize;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.os.Bundle;
@@ -21,6 +22,9 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
@@ -33,6 +37,7 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
@@ -170,6 +175,49 @@ public class SensorsActivity extends Activity {
 		// Initiate a generic request to load it with an ad
 		adView.loadAd(adRequest);
 	}
+	
+    // Initiating Menu XML file (menu.xml)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.layout.menu, menu);
+        return true;
+    }
+ 
+    /**
+     * Event Handling for Individual menu item selected
+     * Identify single menu item by it's id
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+ 
+        switch (item.getItemId())
+        {
+        case R.id.menu_tabs:
+            // Single menu item is selected do something
+            // Ex: launching new activity/screen or show alert message
+            Toast.makeText(SensorsActivity.this, "Tabs is Selected", Toast.LENGTH_SHORT).show();
+            
+        	Intent intent = new Intent(SensorsActivity.this,
+        			SensorsTabActivity.class);
+        	startActivity(intent);
+            
+            return true;
+ 
+        case R.id.menu_settings:
+            Toast.makeText(SensorsActivity.this, "Settings is Selected", Toast.LENGTH_SHORT).show();
+            return true;
+ 
+        case R.id.menu_about:
+            Toast.makeText(SensorsActivity.this, "About is Selected", Toast.LENGTH_SHORT).show();
+            return true;
+ 
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }  
 
 	private void initiate_factories() {
 		Log.d(TAG, "initiate_factories() launched in "
@@ -212,8 +260,9 @@ public class SensorsActivity extends Activity {
 						+ " " + values[1] + " " + values[2]);
 				break;
 			case Sensor.TYPE_MAGNETIC_FIELD:
-				instance.sensors_text_magnetic_field.setText("" + values[0]
-						+ " " + values[1] + " " + values[2]);
+				instance.sensors_text_magnetic_field.setText("" + values[0]);
+				//instance.sensors_text_magnetic_field2.setText(values[1]);
+				//instance.sensors_text_magnetic_field3.setText(values[2]);
 				break;
 			case Sensor.TYPE_LINEAR_ACCELERATION:
 				instance.sensors_text_linear_acceleration.setText(""
