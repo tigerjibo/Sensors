@@ -41,15 +41,15 @@
 
         <TextView
             android:id="@+id/sensors_text_magneticfield2"
-            style="@style/TextStyle"
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
             android:ellipsize="marquee"
             android:singleLine="true"
             android:text="---"
-            android:textColor="@color/textColor"
-            android:textSize="@dimen/textSize" />
+            style="@style/TextStyle2"
+            android:textColor="@color/textColor2"
+            android:textSize="@dimen/textSize2" />
         
         <TextView
             android:id="@+id/sensors_text_magneticfield3"

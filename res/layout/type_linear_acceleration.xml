@@ -25,7 +25,10 @@
             android:layout_weight="1"
             android:id="@+id/main_text_view_linear_acceleration"        
             android:gravity="center_vertical"
-            android:text="@string/linear_acceleration" />
+            android:text="@string/linear_acceleration"
+            style="@style/TextStyle2"
+            android:textColor="@color/textColor2"
+            android:textSize="@dimen/textSize2" />
             
         <TextView  
             android:layout_width="fill_parent"

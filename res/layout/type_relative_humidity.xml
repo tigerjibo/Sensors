@@ -25,7 +25,10 @@
             android:layout_weight="1"
             android:id="@+id/main_text_view_relative_humidity"        
             android:gravity="center_vertical"
-            android:text="@string/relative_humidity" />
+            android:text="@string/relative_humidity"
+            style="@style/TextStyle2"
+            android:textColor="@color/textColor2"
+            android:textSize="@dimen/textSize2" />
             
         <TextView  
             android:layout_width="fill_parent"

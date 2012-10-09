@@ -25,6 +25,10 @@
     <style name="TextStyle">
         <item name="android:textStyle">bold</item>
     </style>
+    
+    <style name="TextStyle2">
+        <item name="android:textStyle">bold</item>
+    </style>
 
     <style name="SplashScreen">
         <item name="android:padding">0dp</item>

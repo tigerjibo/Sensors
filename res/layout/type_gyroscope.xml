@@ -25,7 +25,10 @@
             android:layout_weight="1"
             android:id="@+id/main_text_view_gyroscope"        
             android:gravity="center_vertical"
-            android:text="@string/gyroscope" />
+            android:text="@string/gyroscope"
+            style="@style/TextStyle2"
+            android:textColor="@color/textColor2"
+            android:textSize="@dimen/textSize2" />
             
         <TextView  
             android:layout_width="fill_parent"

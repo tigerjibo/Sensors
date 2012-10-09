@@ -672,6 +672,7 @@ public class SensorsActivity extends Activity {
 		
 		exitApplicationButton.setMinWidth((int) (SCREEN_WIDTH * 0.7));
 		exitApplicationButton.setMaxWidth((int) (SCREEN_WIDTH * 0.7));
+		exitApplicationButton.setWidth((int) (SCREEN_WIDTH * 0.7));
 	}
 
 	private void setComponentsActions() {

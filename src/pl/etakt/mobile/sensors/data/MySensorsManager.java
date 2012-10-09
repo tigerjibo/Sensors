@@ -4,10 +4,11 @@ import pl.etakt.mobile.sensors.SensorsActivity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.util.Log;
 
 public class MySensorsManager {
 	
-	private SensorsActivity instance;
+	private SensorsFactory sensorsFactory;
 	
 	private Sensor ACCELEROMETER = null;
 	private Sensor AMBIENT_TEMPERATURE = null;
@@ -29,10 +30,12 @@ public class MySensorsManager {
 	
 	private static final String TAG = "MySensorsManager";
 	
-	private SensorManager sensorManager;
+	//private SensorManager sensorManager;
 	
 	public MySensorsManager(SensorsActivity instance){
-		this.instance = instance;
+		sensorsFactory.sensorsActivity = instance;
+		sensorsFactory.mySensorsManager = this;
+		Log.i(TAG, "MySensorsManager object created");
 	}
 	
 	public boolean initiate(){
