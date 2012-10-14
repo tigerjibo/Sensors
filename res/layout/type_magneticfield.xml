@@ -25,7 +25,10 @@
             android:layout_height="0dip"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/magnetic_field" />
+            android:text="@string/magnetic_field"
+            style="@style/TextStyle2"
+            android:textColor="@color/textColor2"
+            android:textSize="@dimen/textSize2" />
 
         <TextView
             android:id="@+id/sensors_text_magneticfield"
@@ -47,9 +50,9 @@
             android:ellipsize="marquee"
             android:singleLine="true"
             android:text="---"
-            style="@style/TextStyle2"
-            android:textColor="@color/textColor2"
-            android:textSize="@dimen/textSize2" />
+            style="@style/TextStyle"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSize" />
         
         <TextView
             android:id="@+id/sensors_text_magneticfield3"

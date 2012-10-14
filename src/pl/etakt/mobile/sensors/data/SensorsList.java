@@ -1,6 +1,10 @@
 package pl.etakt.mobile.sensors.data;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import pl.etakt.mobile.sensors.R;
 import pl.etakt.mobile.sensors.SensorsActivity;
@@ -29,12 +33,15 @@ public class SensorsList {
 	protected static SensorsList instance;
 
 	private List<Sensor> sensorList;
+	private List<SensorEventListener> sensorListenersList;
+	private Boolean ACTION_SUCCESS = true;
 
 	private final static String TAG = "SensorsList";
 
 	public SensorsList(SensorsActivity sensorsActivityInstance) {
 		this.sensorsActivityInstance = sensorsActivityInstance;
 		instance = this;
+		sensorListenersList = new ArrayList<SensorEventListener>();
 		Log.d(TAG, "SensorsList object created");
 	}
 
@@ -145,8 +152,16 @@ public class SensorsList {
 			sensorManager.registerListener(sel, s,
 					SensorManager.SENSOR_DELAY_NORMAL);
 			Log.i(TAG, "Sensor registered");
+			sensorListenersList.add(sel);
 			Log.d(TAG, "Sensor type is: " + s.getType());
 		}
+	}
+	
+	public Boolean stopAll(){
+		for(SensorEventListener s : sensorListenersList){
+			sensorManager.unregisterListener(s);
+		}
+		return ACTION_SUCCESS ;
 	}
 
 }

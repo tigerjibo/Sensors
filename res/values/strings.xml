@@ -2,6 +2,7 @@
 <resources>
 
     <string name="hello">Hello!</string>
+    <string name="app_desc">Application which displays data from device sensors</string>
     <string name="app_name">Advanced sensors for You</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>

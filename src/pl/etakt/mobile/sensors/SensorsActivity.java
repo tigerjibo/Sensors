@@ -4,6 +4,7 @@ import java.util.List;
 
 import pl.etakt.mobile.sensors.audio.AverageNoise;
 import pl.etakt.mobile.sensors.data.MySensorsManager;
+import pl.etakt.mobile.sensors.data.SensorsFactory;
 import pl.etakt.mobile.sensors.data.SensorsList;
 import pl.etakt.mobile.sensors.engine.AdMobShared;
 import pl.etakt.mobile.sensors.engine.DebugIndicator;
@@ -81,6 +82,21 @@ public class SensorsActivity extends Activity {
 	private TableRow relativeHumidityRow;
 	private TableRow ambientTemperatureRow;
 	private TableRow soundRow;
+	
+	private TableRow acceleratorRowSeparator;
+	private TableRow magneticfieldRowSeparator;
+	private TableRow orientationSensorRowSeparator;
+	private TableRow gyroscopeRowSeparator;
+	private TableRow lightRowSeparator;
+	private TableRow pressureRowSeparator;
+	private TableRow temperatureRowSeparator;
+	private TableRow proximityRowSeparator;
+	private TableRow gravityRowSeparator;
+	private TableRow linearAccelerationRowSeparator;
+	private TableRow rotationvectorRowSeparator;
+	private TableRow relativeHumidityRowSeparator;
+	private TableRow ambientTemperatureRowSeparator;
+	private TableRow soundRowSeparator;
 
 	private static final int LIGHT_SENSOR = -10;
 
@@ -335,6 +351,20 @@ public class SensorsActivity extends Activity {
 		relativeHumidityRow = ((TableRow) findViewById(R.id.relative_humidity_row));
 		ambientTemperatureRow = ((TableRow) findViewById(R.id.ambient_temperature_row));
 		soundRow = ((TableRow) findViewById(R.id.sound_row));
+		
+		acceleratorRowSeparator = ((TableRow) findViewById(R.id.seperator1));
+		magneticfieldRowSeparator = ((TableRow) findViewById(R.id.seperator2));
+		orientationSensorRowSeparator = ((TableRow) findViewById(R.id.seperator3));
+		gyroscopeRowSeparator = ((TableRow) findViewById(R.id.seperator4));
+		lightRowSeparator = ((TableRow) findViewById(R.id.seperator5));
+		pressureRowSeparator = ((TableRow) findViewById(R.id.seperator6));
+		temperatureRowSeparator = ((TableRow) findViewById(R.id.seperator7));
+		proximityRowSeparator = ((TableRow) findViewById(R.id.seperator8));
+		gravityRowSeparator = ((TableRow) findViewById(R.id.seperator9));
+		linearAccelerationRowSeparator = ((TableRow) findViewById(R.id.seperator10));
+		rotationvectorRowSeparator = ((TableRow) findViewById(R.id.seperator11));
+		relativeHumidityRowSeparator = ((TableRow) findViewById(R.id.seperator12));
+		ambientTemperatureRowSeparator = ((TableRow) findViewById(R.id.seperator13));
 
 		exitApplicationButton = (Button) findViewById(R.id.exitApplicationButton);
 	}
@@ -383,6 +413,8 @@ public class SensorsActivity extends Activity {
 					// layout.addView(b);
 					acceleratorRow.addView(b);
 				}
+				
+				acceleratorRowSeparator.setVisibility(View.VISIBLE);
 
 				break;
 			case Sensor.TYPE_GRAVITY:
@@ -415,6 +447,8 @@ public class SensorsActivity extends Activity {
 
 					gravityRow.addView(b);
 				}
+				
+				gravityRowSeparator.setVisibility(View.VISIBLE);
 
 				break;
 			case Sensor.TYPE_GYROSCOPE:
@@ -446,6 +480,8 @@ public class SensorsActivity extends Activity {
 
 					gyroscopeRow.addView(b);
 				}
+				
+				gyroscopeRowSeparator.setVisibility(View.VISIBLE);
 
 				break;
 			case Sensor.TYPE_LIGHT:
@@ -476,6 +512,8 @@ public class SensorsActivity extends Activity {
 
 					lightRow.addView(b);
 				}
+				
+				lightRowSeparator.setVisibility(View.VISIBLE);
 
 				break;
 			case Sensor.TYPE_LINEAR_ACCELERATION:
@@ -508,6 +546,8 @@ public class SensorsActivity extends Activity {
 
 					linearAccelerationRow.addView(b);
 				}
+				
+				linearAccelerationRowSeparator.setVisibility(View.VISIBLE);
 
 				break;
 			case Sensor.TYPE_MAGNETIC_FIELD:
@@ -540,6 +580,8 @@ public class SensorsActivity extends Activity {
 
 					magneticfieldRow.addView(b);
 				}
+				
+				magneticfieldRowSeparator.setVisibility(View.VISIBLE);
 
 				break;
 			case Sensor.TYPE_ORIENTATION:
@@ -573,6 +615,8 @@ public class SensorsActivity extends Activity {
 
 					orientationSensorRow.addView(b);
 				}
+				
+				orientationSensorRowSeparator.setVisibility(View.VISIBLE);
 
 				break;
 			case Sensor.TYPE_PRESSURE:
@@ -604,6 +648,8 @@ public class SensorsActivity extends Activity {
 
 					pressureRow.addView(b);
 				}
+				
+				pressureRowSeparator.setVisibility(View.VISIBLE);
 
 				break;
 			case Sensor.TYPE_PROXIMITY:
@@ -635,6 +681,8 @@ public class SensorsActivity extends Activity {
 
 					proximityRow.addView(b);
 				}
+				
+				proximityRowSeparator.setVisibility(View.VISIBLE);
 
 				break;
 			default:
@@ -673,6 +721,18 @@ public class SensorsActivity extends Activity {
 		exitApplicationButton.setMinWidth((int) (SCREEN_WIDTH * 0.7));
 		exitApplicationButton.setMaxWidth((int) (SCREEN_WIDTH * 0.7));
 		exitApplicationButton.setWidth((int) (SCREEN_WIDTH * 0.7));
+		
+		int w1 = (int) (SCREEN_WIDTH * 0.7);
+		int h1 = (int) (SCREEN_HEIGHT * 0.10);
+		
+		RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(
+				w1, h1);
+				params1.leftMargin = (int) (0.15 * SCREEN_WIDTH);
+				params1.topMargin = (int) (SCREEN_HEIGHT * 0.87);
+				
+		exitApplicationButton.setLayoutParams(params1);
+		
+		exitApplicationButton.setVisibility(View.VISIBLE);
 	}
 
 	private void setComponentsActions() {
@@ -692,6 +752,7 @@ public class SensorsActivity extends Activity {
 	@Override
 	public void onPause() {
 		Log.i(TAG, "onPause() in SensorsActivity called");
+		(new SensorsFactory()).stopAll();
 		super.onPause();
 	}
 
@@ -702,6 +763,7 @@ public class SensorsActivity extends Activity {
 			Log.i(TAG, "adView != null");
 			adView.destroy();
 		}
+		(new SensorsFactory()).stopAll();
 		super.onDestroy();
 	}
 
