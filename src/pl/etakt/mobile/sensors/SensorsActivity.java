@@ -113,16 +113,59 @@ public class SensorsActivity extends Activity {
 	private int SCREEN_HEIGHT;
 
 	private TextView sensors_text_accelerometer;
+	private TextView sensors_text_accelerometer2;
+	private TextView sensors_text_accelerometer3;
+	private TextView sensors_text_accelerometer_stamp;
+	
 	private TextView sensors_text_gravity;
+	private TextView sensors_text_gravity2;
+	private TextView sensors_text_gravity3;
+	private TextView sensors_text_gravity_stamp;
+	
 	private TextView sensors_text_gyroscope;
+	private TextView sensors_text_gyroscope2;
+	private TextView sensors_text_gyroscope3;
+	private TextView sensors_text_gyroscope_stamp;
+	
 	private TextView sensors_text_light;
+	private TextView sensors_text_light2;
+	private TextView sensors_text_light3;
+	private TextView sensors_text_light_stamp;
+	
 	private TextView sensors_text_linear_acceleration;
+	private TextView sensors_text_linear_acceleration2;
+	private TextView sensors_text_linear_acceleration3;
+	private TextView sensors_text_linear_acceleration_stamp;
+	
 	private TextView sensors_text_magnetic_field;
+	private TextView sensors_text_magnetic_field2;
+	private TextView sensors_text_magnetic_field3;
+	private TextView sensors_text_magnetic_field_stamp;
+	
 	private TextView sensors_text_orientation;
+	private TextView sensors_text_orientation2;
+	private TextView sensors_text_orientation3;
+	private TextView sensors_text_orientation_stamp;
+	
 	private TextView sensors_text_pressure;
+	private TextView sensors_text_pressure2;
+	private TextView sensors_text_pressure3;
+	private TextView sensors_text_pressure_stamp;
+	
 	private TextView sensors_text_proximity;
+	private TextView sensors_text_proximity2;
+	private TextView sensors_text_proximity3;
+	private TextView sensors_text_proximity_stamp;
+	
 	private TextView sensors_text_temperature;
+	private TextView sensors_text_temperature2;
+	private TextView sensors_text_temperature3;
+	private TextView sensors_text_temperature_stamp;
+	
 	private TextView sensors_text_rotation_vector;
+	private TextView sensors_text_rotation_vector2;
+	private TextView sensors_text_rotation_vector3;
+	private TextView sensors_text_rotation_vector_stamp;
 
 	private Button exitApplicationButton;
 
@@ -266,31 +309,43 @@ public class SensorsActivity extends Activity {
 	}
 
 	protected static Handler catUpdater = new Handler() {
+		
+		String timestamp = "Refreshed after ";
+		String timestamp2 = " ms";
 
 		@Override
 		public void handleMessage(Message msg) {
 			float[] values = (float[]) msg.obj;
 			switch (msg.what) {
 			case Sensor.TYPE_ACCELEROMETER:
-				instance.sensors_text_accelerometer.setText("" + values[0]
-						+ " " + values[1] + " " + values[2]);
+				instance.sensors_text_accelerometer.setText(values[0] + " acceleration minus Gx on the x-axis");
+				instance.sensors_text_accelerometer2.setText(values[1] + " acceleration minus Gx on the y-axis");
+				instance.sensors_text_accelerometer3.setText(values[2] + " acceleration minus Gx on the z-axis");
+				instance.sensors_text_accelerometer_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_MAGNETIC_FIELD:
-				instance.sensors_text_magnetic_field.setText("" + values[0]);
-				//instance.sensors_text_magnetic_field2.setText(values[1]);
-				//instance.sensors_text_magnetic_field3.setText(values[2]);
+				instance.sensors_text_magnetic_field.setText(values[0] + " uT on X Axis");
+				instance.sensors_text_magnetic_field2.setText(values[1] + " uT on Y Axis");
+				instance.sensors_text_magnetic_field3.setText(values[2] + " uT on Z Axis");
+				instance.sensors_text_magnetic_field_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_LINEAR_ACCELERATION:
-				instance.sensors_text_linear_acceleration.setText(""
-						+ values[0] + " " + values[1] + " " + values[2]);
+				instance.sensors_text_linear_acceleration.setText("" + values[0]);
+				instance.sensors_text_linear_acceleration2.setText("" + values[1]);
+				instance.sensors_text_linear_acceleration3.setText("" + values[2]);
+				instance.sensors_text_linear_acceleration_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_ORIENTATION:
-				instance.sensors_text_orientation.setText("" + values[0] + " "
-						+ values[1] + " " + values[2]);
+				instance.sensors_text_orientation.setText("" + values[0]);
+				instance.sensors_text_orientation2.setText("" + values[1]);
+				instance.sensors_text_orientation3.setText("" + values[2]);
+				instance.sensors_text_orientation_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_PROXIMITY:
-				instance.sensors_text_proximity.setText("" + values[0] + " "
-						+ values[1] + " " + values[2]);
+				instance.sensors_text_proximity.setText("" + values[0]);
+				instance.sensors_text_proximity2.setText("" + values[1]);
+				instance.sensors_text_proximity3.setText("" + values[2]);
+				instance.sensors_text_proximity_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_TEMPERATURE:
 				instance.sensors_text_temperature.setText("" + values[0] + " "
@@ -409,6 +464,12 @@ public class SensorsActivity extends Activity {
 
 					sensors_text_accelerometer = ((TextView) b
 							.findViewById(R.id.sensors_text_accelerometer));
+					sensors_text_accelerometer2 = ((TextView) b
+							.findViewById(R.id.sensors_text_accelerometer2));
+					sensors_text_accelerometer3 = ((TextView) b
+							.findViewById(R.id.sensors_text_accelerometer3));
+					sensors_text_accelerometer_stamp = ((TextView) b
+							.findViewById(R.id.sensors_text_accelerometer_stamp));
 
 					// layout.addView(b);
 					acceleratorRow.addView(b);
@@ -444,6 +505,12 @@ public class SensorsActivity extends Activity {
 
 					sensors_text_gravity = ((TextView) b
 							.findViewById(R.id.sensors_text_gravity));
+					sensors_text_gravity2 = ((TextView) b
+							.findViewById(R.id.sensors_text_gravity2));
+					sensors_text_gravity3 = ((TextView) b
+							.findViewById(R.id.sensors_text_gravity3));
+					sensors_text_gravity_stamp = ((TextView) b
+							.findViewById(R.id.sensors_text_gravity_stamp));
 
 					gravityRow.addView(b);
 				}
@@ -477,6 +544,12 @@ public class SensorsActivity extends Activity {
 
 					sensors_text_gyroscope = ((TextView) b
 							.findViewById(R.id.sensors_text_gyroscope));
+					sensors_text_gyroscope2 = ((TextView) b
+							.findViewById(R.id.sensors_text_gyroscope2));
+					sensors_text_gyroscope3 = ((TextView) b
+							.findViewById(R.id.sensors_text_gyroscope3));
+					sensors_text_gyroscope_stamp = ((TextView) b
+							.findViewById(R.id.sensors_text_gyroscope_stamp));
 
 					gyroscopeRow.addView(b);
 				}
@@ -509,6 +582,12 @@ public class SensorsActivity extends Activity {
 
 					sensors_text_light = ((TextView) b
 							.findViewById(R.id.sensors_text_light));
+					sensors_text_light2 = ((TextView) b
+							.findViewById(R.id.sensors_text_light2));
+					sensors_text_light3 = ((TextView) b
+							.findViewById(R.id.sensors_text_light3));
+					sensors_text_light_stamp = ((TextView) b
+							.findViewById(R.id.sensors_text_light_stamp));
 
 					lightRow.addView(b);
 				}
@@ -543,6 +622,12 @@ public class SensorsActivity extends Activity {
 
 					sensors_text_linear_acceleration = ((TextView) b
 							.findViewById(R.id.sensors_text_linear_acceleration));
+					sensors_text_linear_acceleration2 = ((TextView) b
+							.findViewById(R.id.sensors_text_linear_acceleration2));
+					sensors_text_linear_acceleration3 = ((TextView) b
+							.findViewById(R.id.sensors_text_linear_acceleration3));
+					sensors_text_linear_acceleration_stamp = ((TextView) b
+							.findViewById(R.id.sensors_text_linear_acceleration_stamp));
 
 					linearAccelerationRow.addView(b);
 				}
@@ -577,6 +662,12 @@ public class SensorsActivity extends Activity {
 
 					sensors_text_magnetic_field = ((TextView) b
 							.findViewById(R.id.sensors_text_magneticfield));
+					sensors_text_magnetic_field2 = ((TextView) b
+							.findViewById(R.id.sensors_text_magneticfield2));
+					sensors_text_magnetic_field3 = ((TextView) b
+							.findViewById(R.id.sensors_text_magneticfield3));
+					sensors_text_magnetic_field_stamp = ((TextView) b
+							.findViewById(R.id.sensors_text_magneticfield_stamp));
 
 					magneticfieldRow.addView(b);
 				}
@@ -612,6 +703,12 @@ public class SensorsActivity extends Activity {
 
 					sensors_text_orientation = ((TextView) b
 							.findViewById(R.id.sensors_text_orientation));
+					sensors_text_orientation2 = ((TextView) b
+							.findViewById(R.id.sensors_text_orientation2));
+					sensors_text_orientation3 = ((TextView) b
+							.findViewById(R.id.sensors_text_orientation3));
+					sensors_text_orientation_stamp = ((TextView) b
+							.findViewById(R.id.sensors_text_orientation_stamp));
 
 					orientationSensorRow.addView(b);
 				}

@@ -41,6 +41,42 @@
             style="@style/TextStyle"
             android:textColor="@color/textColor"
             android:textSize="@dimen/textSize" />
+        
+        <TextView  
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1" 
+            android:id="@+id/sensors_text_gravity2"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:text="---"
+            style="@style/TextStyle"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSize" />
+        
+        <TextView  
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1" 
+            android:id="@+id/sensors_text_gravity3"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:text="---"
+            style="@style/TextStyle"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSize" />
+        
+        <TextView  
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1" 
+            android:id="@+id/sensors_text_gravity_stamp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:text="---"
+            style="@style/TextStyle"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSize" />
             
     </LinearLayout>
     

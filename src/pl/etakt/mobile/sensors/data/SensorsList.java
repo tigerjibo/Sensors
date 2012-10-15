@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.joda.time.DateTime;
+
 import pl.etakt.mobile.sensors.R;
 import pl.etakt.mobile.sensors.SensorsActivity;
 import android.hardware.Sensor;
@@ -127,26 +129,28 @@ public class SensorsList {
 
 	public void init_listeners() {
 
-		SensorEventListener sel = new SensorEventListener() {
-			Handler h = getCatMessenger();
-
-			public void onAccuracyChanged(Sensor sensor, int accuracy) {
-				/* Isn't required for this example */
-				Log.i(TAG, "Accurancy of sensor " + sensor.getName()
-						+ " changed to " + accuracy);
-			}
-
-			public void onSensorChanged(SensorEvent event) {
-				/* Write the accelerometer values to the TextView */
-				float[] values = event.values;
-				// accText.setText("x: "+values[0]+"\ny: "+values[1]+"\nz: "+values[2]);
-				h.sendMessage(h.obtainMessage(event.sensor.getType(), 0,
-						event.accuracy, values));
-			}
-
-		};
-
 		for (Sensor s : sensorList) {
+			
+			SensorEventListener sel = new SensorEventListener() {
+				Handler h = getCatMessenger();
+
+				public void onAccuracyChanged(Sensor sensor, int accuracy) {
+					/* Isn't required for this example */
+					Log.i(TAG, "Accurancy of sensor " + sensor.getName()
+							+ " changed to " + accuracy);
+				}
+
+				public void onSensorChanged(SensorEvent event) {
+					/* Write the accelerometer values to the TextView */
+					float[] values = event.values;
+					//d = ;
+					// accText.setText("x: "+values[0]+"\ny: "+values[1]+"\nz: "+values[2]);
+					h.sendMessage(h.obtainMessage(event.sensor.getType(), (new DateTime(event.timestamp)).getSecondOfDay(),
+							event.accuracy, values));
+				}
+
+			};
+			
 			Log.d(TAG, "Sensor name is: " + s.getName()
 					+ " registering listeners...");
 			sensorManager.registerListener(sel, s,
