@@ -41,6 +41,42 @@
             style="@style/TextStyle"
             android:textColor="@color/textColor"
             android:textSize="@dimen/textSize" />
+        
+        <TextView
+            android:id="@+id/sensors_text_sound2"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="---"
+            style="@style/TextStyle"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSize" />
+        
+        <TextView
+            android:id="@+id/sensors_text_sound3"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="---"
+            style="@style/TextStyle"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSize" />
+        
+        <TextView
+            android:id="@+id/sensors_text_sound_stamp"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="---"
+            style="@style/TextStyle"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSize" />
     </LinearLayout>
 
 </LinearLayout>

@@ -311,7 +311,7 @@ public class SensorsActivity extends Activity {
 	protected static Handler catUpdater = new Handler() {
 		
 		String timestamp = "Refreshed after ";
-		String timestamp2 = " ms";
+		String timestamp2 = " ns";
 
 		@Override
 		public void handleMessage(Message msg) {
@@ -348,28 +348,40 @@ public class SensorsActivity extends Activity {
 				instance.sensors_text_proximity_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_TEMPERATURE:
-				instance.sensors_text_temperature.setText("" + values[0] + " "
-						+ values[1] + " " + values[2]);
+				instance.sensors_text_temperature.setText("" + values[0]);
+				instance.sensors_text_temperature2.setText("" + values[1]);
+				instance.sensors_text_temperature3.setText("" + values[2]);
+				instance.sensors_text_temperature_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_GRAVITY:
-				instance.sensors_text_gravity.setText("" + values[0] + " "
-						+ values[1] + " " + values[2]);
+				instance.sensors_text_gravity.setText("" + values[0]);
+				instance.sensors_text_gravity2.setText("" + values[1]);
+				instance.sensors_text_gravity3.setText("" + values[2]);
+				instance.sensors_text_gravity_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_GYROSCOPE:
-				instance.sensors_text_gyroscope.setText("" + values[0] + " "
-						+ values[1] + " " + values[2]);
+				instance.sensors_text_gyroscope.setText("" + values[0]);
+				instance.sensors_text_gyroscope2.setText("" + values[1]);
+				instance.sensors_text_gyroscope3.setText("" + values[2]);
+				instance.sensors_text_gyroscope_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_PRESSURE:
-				instance.sensors_text_pressure.setText("" + values[0] + " "
-						+ values[1] + " " + values[2]);
+				instance.sensors_text_pressure.setText("" + values[0]);
+				instance.sensors_text_pressure2.setText("" + values[1]);
+				instance.sensors_text_pressure3.setText("" + values[2]);
+				instance.sensors_text_pressure_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_ROTATION_VECTOR:
-				instance.sensors_text_rotation_vector.setText("" + values[0]
-						+ " " + values[1] + " " + values[2]);
+				instance.sensors_text_rotation_vector.setText("" + values[0]);
+				instance.sensors_text_rotation_vector2.setText("" + values[1]);
+				instance.sensors_text_rotation_vector3.setText("" + values[2]);
+				instance.sensors_text_rotation_vector_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case LIGHT_SENSOR:
-				instance.sensors_text_light.setText("" + values[0] + " "
-						+ values[1] + " " + values[2]);
+				instance.sensors_text_light.setText("" + values[0]);
+				instance.sensors_text_light2.setText("" + values[1]);
+				instance.sensors_text_light3.setText("" + values[2]);
+				instance.sensors_text_light_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			default:
 				Log.e(TAG, "Something wrong, default case in messanger receive");
