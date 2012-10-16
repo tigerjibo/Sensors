@@ -35,5 +35,6 @@
     <string name="value">Value</string>
     <string name="values">Values</string>
     <string name="dex_crc">78541454</string>
+    <string name="icon_accelerometer_contentdesc">Accelerometer icon</string>
 
 </resources>

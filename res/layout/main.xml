@@ -2,23 +2,29 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ScrollViewMain"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:scrollbars="vertical" >
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main_relative_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent" >
 
         <TableLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/main_linear_layout"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:padding="6dip" >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:fitsSystemWindows="true"
+            android:padding="10dip" >
 
-            <TableRow android:id="@+id/accelerometer_row" >
+            <TableRow
+                android:id="@+id/accelerometer_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <!-- <include -->
                 <!-- android:id="@+id/include_accelerometer" -->
@@ -27,13 +33,20 @@
                 <!-- android:layout_height="wrap_content" -->
                 <!-- layout="@layout/type_accelerometer" /> -->
             </TableRow>
-            
-            <TableRow android:id="@+id/seperator1" android:visibility="gone" >
-				<ImageView android:src="@drawable/seperator"
-				    android:contentDescription="@string/seperator_desc" />
+
+            <TableRow
+                android:id="@+id/seperator1"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:contentDescription="@string/seperator_desc"
+                    android:src="@drawable/seperator" />
             </TableRow>
 
-            <TableRow android:id="@+id/magneticfield_row" >
+            <TableRow
+                android:id="@+id/magneticfield_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <!-- <include -->
                 <!-- android:id="@+id/include_magneticfield" -->
@@ -42,13 +55,20 @@
                 <!-- android:layout_height="wrap_content" -->
                 <!-- layout="@layout/type_magneticfield" /> -->
             </TableRow>
-            
-            <TableRow android:id="@+id/seperator2" android:visibility="gone" >
-				<ImageView android:src="@drawable/seperator"
-				    android:contentDescription="@string/seperator_desc" />
+
+            <TableRow
+                android:id="@+id/seperator2"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:contentDescription="@string/seperator_desc"
+                    android:src="@drawable/seperator" />
             </TableRow>
 
-            <TableRow android:id="@+id/orientation_sensor_row" >
+            <TableRow
+                android:id="@+id/orientation_sensor_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <!-- <include -->
                 <!-- android:id="@+id/include_orientation_sensor" -->
@@ -57,13 +77,20 @@
                 <!-- android:layout_height="wrap_content" -->
                 <!-- layout="@layout/type_orientation" /> -->
             </TableRow>
-            
-            <TableRow android:id="@+id/seperator3" android:visibility="gone" >
-				<ImageView android:src="@drawable/seperator"
-				    android:contentDescription="@string/seperator_desc" />
+
+            <TableRow
+                android:id="@+id/seperator3"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:contentDescription="@string/seperator_desc"
+                    android:src="@drawable/seperator" />
             </TableRow>
 
-            <TableRow android:id="@+id/gyroscope_row" >
+            <TableRow
+                android:id="@+id/gyroscope_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <!-- <include -->
                 <!-- android:id="@+id/include_gyroscope" -->
@@ -72,13 +99,20 @@
                 <!-- android:layout_height="wrap_content" -->
                 <!-- layout="@layout/type_gyroscope" /> -->
             </TableRow>
-            
-            <TableRow android:id="@+id/seperator4" android:visibility="gone" >
-				<ImageView android:src="@drawable/seperator"
-				    android:contentDescription="@string/seperator_desc" />
+
+            <TableRow
+                android:id="@+id/seperator4"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:contentDescription="@string/seperator_desc"
+                    android:src="@drawable/seperator" />
             </TableRow>
 
-            <TableRow android:id="@+id/light_row" >
+            <TableRow
+                android:id="@+id/light_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <!-- <include -->
                 <!-- android:id="@+id/include_light" -->
@@ -87,13 +121,20 @@
                 <!-- android:layout_height="wrap_content" -->
                 <!-- layout="@layout/type_light" /> -->
             </TableRow>
-            
-            <TableRow android:id="@+id/seperator5" android:visibility="gone" >
-				<ImageView android:src="@drawable/seperator"
-				    android:contentDescription="@string/seperator_desc" />
+
+            <TableRow
+                android:id="@+id/seperator5"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:contentDescription="@string/seperator_desc"
+                    android:src="@drawable/seperator" />
             </TableRow>
 
-            <TableRow android:id="@+id/pressure_row" >
+            <TableRow
+                android:id="@+id/pressure_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <!-- <include -->
                 <!-- android:id="@+id/include_pressure" -->
@@ -102,13 +143,20 @@
                 <!-- android:layout_height="wrap_content" -->
                 <!-- layout="@layout/type_pressure" /> -->
             </TableRow>
-            
-            <TableRow android:id="@+id/seperator6" android:visibility="gone" >
-				<ImageView android:src="@drawable/seperator"
-				    android:contentDescription="@string/seperator_desc" />
+
+            <TableRow
+                android:id="@+id/seperator6"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:contentDescription="@string/seperator_desc"
+                    android:src="@drawable/seperator" />
             </TableRow>
 
-            <TableRow android:id="@+id/temperature_row" >
+            <TableRow
+                android:id="@+id/temperature_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <!-- <include -->
                 <!-- android:id="@+id/include_temperature" -->
@@ -117,13 +165,20 @@
                 <!-- android:layout_height="wrap_content" -->
                 <!-- layout="@layout/type_temperature" /> -->
             </TableRow>
-            
-            <TableRow android:id="@+id/seperator7" android:visibility="gone" >
-				<ImageView android:src="@drawable/seperator"
-				    android:contentDescription="@string/seperator_desc" />
+
+            <TableRow
+                android:id="@+id/seperator7"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:contentDescription="@string/seperator_desc"
+                    android:src="@drawable/seperator" />
             </TableRow>
 
-            <TableRow android:id="@+id/proximity_row" >
+            <TableRow
+                android:id="@+id/proximity_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <!-- <include -->
                 <!-- android:id="@+id/include_proximity" -->
@@ -132,13 +187,20 @@
                 <!-- android:layout_height="wrap_content" -->
                 <!-- layout="@layout/type_proximity" /> -->
             </TableRow>
-            
-            <TableRow android:id="@+id/seperator8" android:visibility="gone" >
-				<ImageView android:src="@drawable/seperator"
-				    android:contentDescription="@string/seperator_desc" />
+
+            <TableRow
+                android:id="@+id/seperator8"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:contentDescription="@string/seperator_desc"
+                    android:src="@drawable/seperator" />
             </TableRow>
 
-            <TableRow android:id="@+id/gravity_row" >
+            <TableRow
+                android:id="@+id/gravity_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <!-- <include -->
                 <!-- android:id="@+id/include_gravity" -->
@@ -147,13 +209,20 @@
                 <!-- android:layout_height="wrap_content" -->
                 <!-- layout="@layout/type_gravity" /> -->
             </TableRow>
-            
-            <TableRow android:id="@+id/seperator9" android:visibility="gone" >
-				<ImageView android:src="@drawable/seperator"
-				    android:contentDescription="@string/seperator_desc" />
+
+            <TableRow
+                android:id="@+id/seperator9"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:contentDescription="@string/seperator_desc"
+                    android:src="@drawable/seperator" />
             </TableRow>
 
-            <TableRow android:id="@+id/linear_acceleration_row" >
+            <TableRow
+                android:id="@+id/linear_acceleration_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <!-- <include -->
                 <!-- android:id="@+id/include_linear_acceleration" -->
@@ -162,13 +231,20 @@
                 <!-- android:layout_height="wrap_content" -->
                 <!-- layout="@layout/type_linear_acceleration" /> -->
             </TableRow>
-            
-            <TableRow android:id="@+id/seperator10" android:visibility="gone" >
-				<ImageView android:src="@drawable/seperator"
-				    android:contentDescription="@string/seperator_desc" />
+
+            <TableRow
+                android:id="@+id/seperator10"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:contentDescription="@string/seperator_desc"
+                    android:src="@drawable/seperator" />
             </TableRow>
 
-            <TableRow android:id="@+id/rotation_vector_row" >
+            <TableRow
+                android:id="@+id/rotation_vector_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <!-- <include -->
                 <!-- android:id="@+id/include_rotation_vector" -->
@@ -177,13 +253,20 @@
                 <!-- android:layout_height="wrap_content" -->
                 <!-- layout="@layout/type_rotation_vector" /> -->
             </TableRow>
-            
-            <TableRow android:id="@+id/seperator11" android:visibility="gone" >
-				<ImageView android:src="@drawable/seperator"
-				    android:contentDescription="@string/seperator_desc" />
+
+            <TableRow
+                android:id="@+id/seperator11"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:contentDescription="@string/seperator_desc"
+                    android:src="@drawable/seperator" />
             </TableRow>
 
-            <TableRow android:id="@+id/relative_humidity_row" >
+            <TableRow
+                android:id="@+id/relative_humidity_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <!-- <include -->
                 <!-- android:id="@+id/include_relative_humidity" -->
@@ -192,13 +275,20 @@
                 <!-- android:layout_height="wrap_content" -->
                 <!-- layout="@layout/type_relative_humidity" /> -->
             </TableRow>
-            
-            <TableRow android:id="@+id/seperator12" android:visibility="gone" >
-				<ImageView android:src="@drawable/seperator"
-				    android:contentDescription="@string/seperator_desc" />
+
+            <TableRow
+                android:id="@+id/seperator12"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:contentDescription="@string/seperator_desc"
+                    android:src="@drawable/seperator" />
             </TableRow>
 
-            <TableRow android:id="@+id/ambient_temperature_row" >
+            <TableRow
+                android:id="@+id/ambient_temperature_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <!-- <include -->
                 <!-- android:id="@+id/include_ambient_temperature" -->
@@ -207,13 +297,20 @@
                 <!-- android:layout_height="wrap_content" -->
                 <!-- layout="@layout/type_ambient_temperature" /> -->
             </TableRow>
-            
-            <TableRow android:id="@+id/seperator13" android:visibility="gone" >
-				<ImageView android:src="@drawable/seperator"
-				    android:contentDescription="@string/seperator_desc" />
+
+            <TableRow
+                android:id="@+id/seperator13"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:contentDescription="@string/seperator_desc"
+                    android:src="@drawable/seperator" />
             </TableRow>
 
-            <TableRow android:id="@+id/sound_row" >
+            <TableRow
+                android:id="@+id/sound_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <!-- <include -->
                 <!-- android:id="@+id/include_ambient_temperature" -->
@@ -234,7 +331,7 @@
                     android:background="@drawable/btn_light_blue"
                     android:tag="@string/exit_button_tag"
                     android:text="@string/exit_button" />
-            </TableRow>
+            </TableRow>
             -->
         </TableLayout>
 
@@ -244,9 +341,9 @@
             android:layout_width="fill_parent"
             android:layout_gravity="center"
             android:background="@drawable/btn_light_blue"
-            android:visibility="gone"
             android:tag="@string/exit_button_tag"
-            android:text="@string/exit_button" />
+            android:text="@string/exit_button"
+            android:visibility="gone" />
     </RelativeLayout>
 
 </ScrollView>

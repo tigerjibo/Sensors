@@ -145,7 +145,9 @@ public class SensorsList {
 					float[] values = event.values;
 					//d = ;
 					// accText.setText("x: "+values[0]+"\ny: "+values[1]+"\nz: "+values[2]);
-					h.sendMessage(h.obtainMessage(event.sensor.getType(), (new DateTime(event.timestamp)).getSecondOfDay(),
+					/*h.sendMessage(h.obtainMessage(event.sensor.getType(), (new DateTime(event.timestamp)).getSecondOfDay(),
+							event.accuracy, values));*/
+					h.sendMessage(h.obtainMessage(event.sensor.getType(), (int) event.timestamp,
 							event.accuracy, values));
 				}
 

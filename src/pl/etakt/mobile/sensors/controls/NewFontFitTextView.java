@@ -23,9 +23,9 @@ public class NewFontFitTextView extends TextView {
         //max size defaults to the intially specified text size unless it is too small
         maxTextSize = this.getTextSize();
         if (maxTextSize < 11) {
-            maxTextSize = 20;
+            maxTextSize = 16;
         }
-        minTextSize = 10;
+        minTextSize = 6;
     }
 
     /* Re size the font so the specified text fits in the text box

@@ -3,6 +3,7 @@ package pl.etakt.mobile.sensors;
 import java.util.List;
 
 import pl.etakt.mobile.sensors.audio.AverageNoise;
+import pl.etakt.mobile.sensors.controls.NewFontFitTextView;
 import pl.etakt.mobile.sensors.data.MySensorsManager;
 import pl.etakt.mobile.sensors.data.SensorsFactory;
 import pl.etakt.mobile.sensors.data.SensorsList;
@@ -112,60 +113,65 @@ public class SensorsActivity extends Activity {
 
 	private int SCREEN_HEIGHT;
 
-	private TextView sensors_text_accelerometer;
-	private TextView sensors_text_accelerometer2;
-	private TextView sensors_text_accelerometer3;
-	private TextView sensors_text_accelerometer_stamp;
+	private NewFontFitTextView sensors_text_accelerometer;
+	private NewFontFitTextView sensors_text_accelerometer2;
+	private NewFontFitTextView sensors_text_accelerometer3;
+	private NewFontFitTextView sensors_text_accelerometer_stamp;
 	
-	private TextView sensors_text_gravity;
-	private TextView sensors_text_gravity2;
-	private TextView sensors_text_gravity3;
-	private TextView sensors_text_gravity_stamp;
+	private NewFontFitTextView sensors_text_gravity;
+	private NewFontFitTextView sensors_text_gravity2;
+	private NewFontFitTextView sensors_text_gravity3;
+	private NewFontFitTextView sensors_text_gravity_stamp;
 	
-	private TextView sensors_text_gyroscope;
-	private TextView sensors_text_gyroscope2;
-	private TextView sensors_text_gyroscope3;
-	private TextView sensors_text_gyroscope_stamp;
+	private NewFontFitTextView sensors_text_gyroscope;
+	private NewFontFitTextView sensors_text_gyroscope2;
+	private NewFontFitTextView sensors_text_gyroscope3;
+	private NewFontFitTextView sensors_text_gyroscope_stamp;
 	
-	private TextView sensors_text_light;
-	private TextView sensors_text_light2;
-	private TextView sensors_text_light3;
-	private TextView sensors_text_light_stamp;
+	private NewFontFitTextView sensors_text_light;
+	private NewFontFitTextView sensors_text_light2;
+	private NewFontFitTextView sensors_text_light3;
+	private NewFontFitTextView sensors_text_light_stamp;
 	
-	private TextView sensors_text_linear_acceleration;
-	private TextView sensors_text_linear_acceleration2;
-	private TextView sensors_text_linear_acceleration3;
-	private TextView sensors_text_linear_acceleration_stamp;
+	private NewFontFitTextView sensors_text_linear_acceleration;
+	private NewFontFitTextView sensors_text_linear_acceleration2;
+	private NewFontFitTextView sensors_text_linear_acceleration3;
+	private NewFontFitTextView sensors_text_linear_acceleration_stamp;
 	
-	private TextView sensors_text_magnetic_field;
-	private TextView sensors_text_magnetic_field2;
-	private TextView sensors_text_magnetic_field3;
-	private TextView sensors_text_magnetic_field_stamp;
+	private NewFontFitTextView sensors_text_magnetic_field;
+	private NewFontFitTextView sensors_text_magnetic_field2;
+	private NewFontFitTextView sensors_text_magnetic_field3;
+	private NewFontFitTextView sensors_text_magnetic_field_stamp;
 	
-	private TextView sensors_text_orientation;
-	private TextView sensors_text_orientation2;
-	private TextView sensors_text_orientation3;
-	private TextView sensors_text_orientation_stamp;
+	private NewFontFitTextView sensors_text_orientation;
+	private NewFontFitTextView sensors_text_orientation2;
+	private NewFontFitTextView sensors_text_orientation3;
+	private NewFontFitTextView sensors_text_orientation_stamp;
 	
-	private TextView sensors_text_pressure;
-	private TextView sensors_text_pressure2;
-	private TextView sensors_text_pressure3;
-	private TextView sensors_text_pressure_stamp;
+	private NewFontFitTextView sensors_text_pressure;
+	private NewFontFitTextView sensors_text_pressure2;
+	private NewFontFitTextView sensors_text_pressure3;
+	private NewFontFitTextView sensors_text_pressure_stamp;
 	
-	private TextView sensors_text_proximity;
-	private TextView sensors_text_proximity2;
-	private TextView sensors_text_proximity3;
-	private TextView sensors_text_proximity_stamp;
+	private NewFontFitTextView sensors_text_proximity;
+	private NewFontFitTextView sensors_text_proximity2;
+	private NewFontFitTextView sensors_text_proximity3;
+	private NewFontFitTextView sensors_text_proximity_stamp;
 	
-	private TextView sensors_text_temperature;
-	private TextView sensors_text_temperature2;
-	private TextView sensors_text_temperature3;
-	private TextView sensors_text_temperature_stamp;
+	private NewFontFitTextView sensors_text_temperature;
+	private NewFontFitTextView sensors_text_temperature2;
+	private NewFontFitTextView sensors_text_temperature3;
+	private NewFontFitTextView sensors_text_temperature_stamp;
 	
-	private TextView sensors_text_rotation_vector;
-	private TextView sensors_text_rotation_vector2;
-	private TextView sensors_text_rotation_vector3;
-	private TextView sensors_text_rotation_vector_stamp;
+	private NewFontFitTextView sensors_text_rotation_vector;
+	private NewFontFitTextView sensors_text_rotation_vector2;
+	private NewFontFitTextView sensors_text_rotation_vector3;
+	private NewFontFitTextView sensors_text_rotation_vector_stamp;
+	
+	private NewFontFitTextView sensors_text_sound;
+	private NewFontFitTextView sensors_text_sound2;
+	private NewFontFitTextView sensors_text_sound3;
+	private NewFontFitTextView sensors_text_sound_stamp;
 
 	private Button exitApplicationButton;
 
@@ -446,6 +452,8 @@ public class SensorsActivity extends Activity {
 
 		int w = (int) (SCREEN_WIDTH * 0.3);
 		int h = (int) (SCREEN_HEIGHT * 0.2);
+		
+		//
 
 		for (Sensor s : listSensors) {
 			switch (s.getType()) {
@@ -474,13 +482,13 @@ public class SensorsActivity extends Activity {
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
 
-					sensors_text_accelerometer = ((TextView) b
+					sensors_text_accelerometer = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_accelerometer));
-					sensors_text_accelerometer2 = ((TextView) b
+					sensors_text_accelerometer2 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_accelerometer2));
-					sensors_text_accelerometer3 = ((TextView) b
+					sensors_text_accelerometer3 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_accelerometer3));
-					sensors_text_accelerometer_stamp = ((TextView) b
+					sensors_text_accelerometer_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_accelerometer_stamp));
 
 					// layout.addView(b);
@@ -515,13 +523,13 @@ public class SensorsActivity extends Activity {
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
 
-					sensors_text_gravity = ((TextView) b
+					sensors_text_gravity = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_gravity));
-					sensors_text_gravity2 = ((TextView) b
+					sensors_text_gravity2 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_gravity2));
-					sensors_text_gravity3 = ((TextView) b
+					sensors_text_gravity3 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_gravity3));
-					sensors_text_gravity_stamp = ((TextView) b
+					sensors_text_gravity_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_gravity_stamp));
 
 					gravityRow.addView(b);
@@ -554,13 +562,13 @@ public class SensorsActivity extends Activity {
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
 
-					sensors_text_gyroscope = ((TextView) b
+					sensors_text_gyroscope = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_gyroscope));
-					sensors_text_gyroscope2 = ((TextView) b
+					sensors_text_gyroscope2 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_gyroscope2));
-					sensors_text_gyroscope3 = ((TextView) b
+					sensors_text_gyroscope3 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_gyroscope3));
-					sensors_text_gyroscope_stamp = ((TextView) b
+					sensors_text_gyroscope_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_gyroscope_stamp));
 
 					gyroscopeRow.addView(b);
@@ -754,6 +762,12 @@ public class SensorsActivity extends Activity {
 
 					sensors_text_pressure = ((TextView) b
 							.findViewById(R.id.sensors_text_pressure));
+					sensors_text_pressure2 = ((TextView) b
+							.findViewById(R.id.sensors_text_pressure2));
+					sensors_text_pressure3 = ((TextView) b
+							.findViewById(R.id.sensors_text_pressure3));
+					sensors_text_pressure_stamp = ((TextView) b
+							.findViewById(R.id.sensors_text_pressure_stamp));
 
 					pressureRow.addView(b);
 				}
@@ -787,6 +801,12 @@ public class SensorsActivity extends Activity {
 
 					sensors_text_proximity = ((TextView) b
 							.findViewById(R.id.sensors_text_proximity));
+					sensors_text_proximity2 = ((TextView) b
+							.findViewById(R.id.sensors_text_proximity2));
+					sensors_text_proximity3 = ((TextView) b
+							.findViewById(R.id.sensors_text_proximity3));
+					sensors_text_proximity_stamp = ((TextView) b
+							.findViewById(R.id.sensors_text_proximity_stamp));
 
 					proximityRow.addView(b);
 				}
@@ -822,6 +842,15 @@ public class SensorsActivity extends Activity {
 
 				image.setMaxHeight(h);
 				image.setMaxWidth(w);
+				
+				sensors_text_sound = ((TextView) b
+						.findViewById(R.id.sensors_text_sound));
+				sensors_text_sound2 = ((TextView) b
+						.findViewById(R.id.sensors_text_sound2));
+				sensors_text_sound3 = ((TextView) b
+						.findViewById(R.id.sensors_text_sound3));
+				sensors_text_sound_stamp = ((TextView) b
+						.findViewById(R.id.sensors_text_sound_stamp));
 
 				soundRow.addView(b);
 			}
