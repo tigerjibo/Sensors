@@ -600,13 +600,13 @@ public class SensorsActivity extends Activity {
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
 
-					sensors_text_light = ((TextView) b
+					sensors_text_light = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_light));
-					sensors_text_light2 = ((TextView) b
+					sensors_text_light2 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_light2));
-					sensors_text_light3 = ((TextView) b
+					sensors_text_light3 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_light3));
-					sensors_text_light_stamp = ((TextView) b
+					sensors_text_light_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_light_stamp));
 
 					lightRow.addView(b);
@@ -640,13 +640,13 @@ public class SensorsActivity extends Activity {
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
 
-					sensors_text_linear_acceleration = ((TextView) b
+					sensors_text_linear_acceleration = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_linear_acceleration));
-					sensors_text_linear_acceleration2 = ((TextView) b
+					sensors_text_linear_acceleration2 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_linear_acceleration2));
-					sensors_text_linear_acceleration3 = ((TextView) b
+					sensors_text_linear_acceleration3 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_linear_acceleration3));
-					sensors_text_linear_acceleration_stamp = ((TextView) b
+					sensors_text_linear_acceleration_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_linear_acceleration_stamp));
 
 					linearAccelerationRow.addView(b);
@@ -680,13 +680,13 @@ public class SensorsActivity extends Activity {
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
 
-					sensors_text_magnetic_field = ((TextView) b
+					sensors_text_magnetic_field = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_magneticfield));
-					sensors_text_magnetic_field2 = ((TextView) b
+					sensors_text_magnetic_field2 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_magneticfield2));
-					sensors_text_magnetic_field3 = ((TextView) b
+					sensors_text_magnetic_field3 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_magneticfield3));
-					sensors_text_magnetic_field_stamp = ((TextView) b
+					sensors_text_magnetic_field_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_magneticfield_stamp));
 
 					magneticfieldRow.addView(b);
@@ -721,13 +721,13 @@ public class SensorsActivity extends Activity {
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
 
-					sensors_text_orientation = ((TextView) b
+					sensors_text_orientation = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_orientation));
-					sensors_text_orientation2 = ((TextView) b
+					sensors_text_orientation2 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_orientation2));
-					sensors_text_orientation3 = ((TextView) b
+					sensors_text_orientation3 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_orientation3));
-					sensors_text_orientation_stamp = ((TextView) b
+					sensors_text_orientation_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_orientation_stamp));
 
 					orientationSensorRow.addView(b);
@@ -760,13 +760,13 @@ public class SensorsActivity extends Activity {
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
 
-					sensors_text_pressure = ((TextView) b
+					sensors_text_pressure = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_pressure));
-					sensors_text_pressure2 = ((TextView) b
+					sensors_text_pressure2 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_pressure2));
-					sensors_text_pressure3 = ((TextView) b
+					sensors_text_pressure3 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_pressure3));
-					sensors_text_pressure_stamp = ((TextView) b
+					sensors_text_pressure_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_pressure_stamp));
 
 					pressureRow.addView(b);
@@ -799,13 +799,13 @@ public class SensorsActivity extends Activity {
 					image.setMaxHeight(h);
 					image.setMaxWidth(w);
 
-					sensors_text_proximity = ((TextView) b
+					sensors_text_proximity = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_proximity));
-					sensors_text_proximity2 = ((TextView) b
+					sensors_text_proximity2 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_proximity2));
-					sensors_text_proximity3 = ((TextView) b
+					sensors_text_proximity3 = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_proximity3));
-					sensors_text_proximity_stamp = ((TextView) b
+					sensors_text_proximity_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_proximity_stamp));
 
 					proximityRow.addView(b);
@@ -843,13 +843,13 @@ public class SensorsActivity extends Activity {
 				image.setMaxHeight(h);
 				image.setMaxWidth(w);
 				
-				sensors_text_sound = ((TextView) b
+				sensors_text_sound = ((NewFontFitTextView) b
 						.findViewById(R.id.sensors_text_sound));
-				sensors_text_sound2 = ((TextView) b
+				sensors_text_sound2 = ((NewFontFitTextView) b
 						.findViewById(R.id.sensors_text_sound2));
-				sensors_text_sound3 = ((TextView) b
+				sensors_text_sound3 = ((NewFontFitTextView) b
 						.findViewById(R.id.sensors_text_sound3));
-				sensors_text_sound_stamp = ((TextView) b
+				sensors_text_sound_stamp = ((NewFontFitTextView) b
 						.findViewById(R.id.sensors_text_sound_stamp));
 
 				soundRow.addView(b);
