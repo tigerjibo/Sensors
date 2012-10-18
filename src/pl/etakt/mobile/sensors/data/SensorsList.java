@@ -142,12 +142,14 @@ public class SensorsList {
 
 				public void onSensorChanged(SensorEvent event) {
 					/* Write the accelerometer values to the TextView */
-					float[] values = event.values;
+					float[] values = { event.values[0], event.values[1], event.values[2], event.timestamp };
 					//d = ;
 					// accText.setText("x: "+values[0]+"\ny: "+values[1]+"\nz: "+values[2]);
 					/*h.sendMessage(h.obtainMessage(event.sensor.getType(), (new DateTime(event.timestamp)).getSecondOfDay(),
 							event.accuracy, values));*/
-					h.sendMessage(h.obtainMessage(event.sensor.getType(), (int) event.timestamp,
+					/*h.sendMessage(h.obtainMessage(event.sensor.getType(), (int) event.timestamp,
+							event.accuracy, values));*/
+					h.sendMessage(h.obtainMessage(event.sensor.getType(), (DateTime.now()).getSecondOfDay(),
 							event.accuracy, values));
 				}
 

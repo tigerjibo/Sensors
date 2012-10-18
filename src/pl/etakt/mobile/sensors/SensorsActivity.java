@@ -17,6 +17,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -313,20 +314,85 @@ public class SensorsActivity extends Activity {
 
 		averageNoise = new AverageNoise();
 	}
+	
+	static float[] gravity = {0, 0, 0};
+	
+	private static float[] accelerometer2(float v1, float v2, float v3){
+		final float alpha = (float) 0.8;
+
+        gravity[0] = alpha * gravity[0] + (1 - alpha) * v1;
+        gravity[1] = alpha * gravity[1] + (1 - alpha) * v2;
+        gravity[2] = alpha * gravity[2] + (1 - alpha) * v3;
+
+        float linear_acceleration[] = {0.0f, 0.0f, 0.0f};
+        linear_acceleration[0] = v1 - gravity[0];
+        linear_acceleration[1] = v2 - gravity[1];
+        linear_acceleration[2] = v3 - gravity[2];
+        
+        return linear_acceleration;
+	}
+	
+	private static final float NS2S = 1.0f / 1000000000.0f;
+    private static final float[] deltaRotationVector = {0, 0, 0, 0};//new float[4]();
+    private static float timestamp;
+    final static double EPSILON = 0.0000001;
+	
+	private static float[] gyroscope2(float et, float[] ev){
+		
+		// This timestep's delta rotation to be multiplied by the current rotation
+        // after computing it from the gyro sample data.
+        if (timestamp != 0) {
+            final float dT = (et - timestamp) * NS2S;
+            // Axis of the rotation sample, not normalized yet.
+            float axisX = ev[0];
+            float axisY = ev[1];
+            float axisZ = ev[2];
+
+            // Calculate the angular speed of the sample
+            float omegaMagnitude = (float) Math.sqrt(axisX*axisX + axisY*axisY + axisZ*axisZ);
+
+            // Normalize the rotation vector if it's big enough to get the axis
+            if (omegaMagnitude > EPSILON) {
+                axisX /= omegaMagnitude;
+                axisY /= omegaMagnitude;
+                axisZ /= omegaMagnitude;
+            }
+
+            // Integrate around this axis with the angular speed by the timestep
+            // in order to get a delta rotation from this sample over the timestep
+            // We will convert this axis-angle representation of the delta rotation
+            // into a quaternion before turning it into the rotation matrix.
+            float thetaOverTwo = omegaMagnitude * dT / 2.0f;
+            float sinThetaOverTwo = (float) Math.sin(thetaOverTwo);
+            float cosThetaOverTwo = (float) Math.cos(thetaOverTwo);
+            deltaRotationVector[0] = sinThetaOverTwo * axisX;
+            deltaRotationVector[1] = sinThetaOverTwo * axisY;
+            deltaRotationVector[2] = sinThetaOverTwo * axisZ;
+            deltaRotationVector[3] = cosThetaOverTwo;
+        }
+        timestamp = et;
+        float[] deltaRotationMatrix = new float[9];
+        SensorManager.getRotationMatrixFromVector(deltaRotationMatrix, deltaRotationVector);
+        // User code should concatenate the delta rotation we computed with the current rotation
+        // in order to get the updated rotation.
+        // rotationCurrent = rotationCurrent * deltaRotationMatrix;
+        return deltaRotationMatrix;
+	}
 
 	protected static Handler catUpdater = new Handler() {
 		
-		String timestamp = "Refreshed after ";
-		String timestamp2 = " ns";
+		String timestamp = "Reading number ";
+		String timestamp2 = " (a second of a day)";
 
 		@Override
 		public void handleMessage(Message msg) {
 			float[] values = (float[]) msg.obj;
 			switch (msg.what) {
 			case Sensor.TYPE_ACCELEROMETER:
-				instance.sensors_text_accelerometer.setText(values[0] + " acceleration minus Gx on the x-axis");
-				instance.sensors_text_accelerometer2.setText(values[1] + " acceleration minus Gx on the y-axis");
-				instance.sensors_text_accelerometer3.setText(values[2] + " acceleration minus Gx on the z-axis");
+				float[] x = accelerometer2(values[0], values[1], values[2]);
+				instance.sensors_text_accelerometer.setText("Ad=" + values[0] + " (-g-sigmaF/mass), " + x[0] + " acceleration minus Gx on the x-axis");
+				instance.sensors_text_accelerometer2.setText("Ad=" + values[1] + " (-g-sigmaF/mass), " + x[1] + " acceleration minus Gx on the y-axis");
+				instance.sensors_text_accelerometer3.setText("Ad=" + values[2] + " (-g-sigmaF/mass), " + x[2] + " acceleration minus Gx on the z-axis");
 				instance.sensors_text_accelerometer_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_MAGNETIC_FIELD:
@@ -348,7 +414,7 @@ public class SensorsActivity extends Activity {
 				instance.sensors_text_orientation_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_PROXIMITY:
-				instance.sensors_text_proximity.setText("" + values[0]);
+				instance.sensors_text_proximity.setText("" + values[0] + " Proximity sensor distance measured in centimeters");
 				instance.sensors_text_proximity2.setText("" + values[1]);
 				instance.sensors_text_proximity3.setText("" + values[2]);
 				instance.sensors_text_proximity_stamp.setText(timestamp + msg.arg1 + timestamp2);
@@ -360,27 +426,27 @@ public class SensorsActivity extends Activity {
 				instance.sensors_text_temperature_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_GRAVITY:
-				instance.sensors_text_gravity.setText("" + values[0]);
-				instance.sensors_text_gravity2.setText("" + values[1]);
-				instance.sensors_text_gravity3.setText("" + values[2]);
+				instance.sensors_text_gravity.setText("" + values[0] + " m/s^2");
+				instance.sensors_text_gravity2.setText("" + values[1] + " m/s^2");
+				instance.sensors_text_gravity3.setText("" + values[2] + " m/s^2");
 				instance.sensors_text_gravity_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_GYROSCOPE:
-				instance.sensors_text_gyroscope.setText("" + values[0]);
-				instance.sensors_text_gyroscope2.setText("" + values[1]);
-				instance.sensors_text_gyroscope3.setText("" + values[2]);
+				instance.sensors_text_gyroscope.setText("" + values[0] + " Angular speed around the x-axis");
+				instance.sensors_text_gyroscope2.setText("" + values[1] + " Angular speed around the y-axis");
+				instance.sensors_text_gyroscope3.setText("" + values[2] + " Angular speed around the z-axis");
 				instance.sensors_text_gyroscope_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_PRESSURE:
-				instance.sensors_text_pressure.setText("" + values[0]);
+				instance.sensors_text_pressure.setText("" + values[0] + " Atmospheric pressure in hPa (millibar)");
 				instance.sensors_text_pressure2.setText("" + values[1]);
 				instance.sensors_text_pressure3.setText("" + values[2]);
 				instance.sensors_text_pressure_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case Sensor.TYPE_ROTATION_VECTOR:
-				instance.sensors_text_rotation_vector.setText("" + values[0]);
-				instance.sensors_text_rotation_vector2.setText("" + values[1]);
-				instance.sensors_text_rotation_vector3.setText("" + values[2]);
+				instance.sensors_text_rotation_vector.setText("" + values[0] + " x*sin(fi/2)");
+				instance.sensors_text_rotation_vector2.setText("" + values[1] + " y*sin(fi/2)");
+				instance.sensors_text_rotation_vector3.setText("" + values[2] + " z*sin(fi/2)");
 				instance.sensors_text_rotation_vector_stamp.setText(timestamp + msg.arg1 + timestamp2);
 				break;
 			case LIGHT_SENSOR:
@@ -453,7 +519,9 @@ public class SensorsActivity extends Activity {
 		int w = (int) (SCREEN_WIDTH * 0.3);
 		int h = (int) (SCREEN_HEIGHT * 0.2);
 		
-		//
+		int paddingright = (int)(SCREEN_WIDTH * 0.6);
+		int paddingbottom = 6;
+		int maxsize = 12;
 
 		for (Sensor s : listSensors) {
 			switch (s.getType()) {
@@ -490,6 +558,16 @@ public class SensorsActivity extends Activity {
 							.findViewById(R.id.sensors_text_accelerometer3));
 					sensors_text_accelerometer_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_accelerometer_stamp));
+					
+					sensors_text_accelerometer.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_accelerometer2.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_accelerometer3.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_accelerometer_stamp.setPadding(0, 0, paddingright, paddingbottom);
+					
+					sensors_text_accelerometer.setMaxTextSize(maxsize);
+					sensors_text_accelerometer2.setMaxTextSize(maxsize);
+					sensors_text_accelerometer3.setMaxTextSize(maxsize);
+					sensors_text_accelerometer_stamp.setMaxTextSize(maxsize);
 
 					// layout.addView(b);
 					acceleratorRow.addView(b);
@@ -531,6 +609,16 @@ public class SensorsActivity extends Activity {
 							.findViewById(R.id.sensors_text_gravity3));
 					sensors_text_gravity_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_gravity_stamp));
+					
+					sensors_text_gravity.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_gravity2.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_gravity3.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_gravity_stamp.setPadding(0, 0, paddingright, paddingbottom);
+					
+					sensors_text_gravity.setMaxTextSize(maxsize);
+					sensors_text_gravity2.setMaxTextSize(maxsize);
+					sensors_text_gravity3.setMaxTextSize(maxsize);
+					sensors_text_gravity_stamp.setMaxTextSize(maxsize);
 
 					gravityRow.addView(b);
 				}
@@ -570,6 +658,16 @@ public class SensorsActivity extends Activity {
 							.findViewById(R.id.sensors_text_gyroscope3));
 					sensors_text_gyroscope_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_gyroscope_stamp));
+					
+					sensors_text_gyroscope.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_gyroscope2.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_gyroscope3.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_gyroscope_stamp.setPadding(0, 0, paddingright, paddingbottom);
+					
+					sensors_text_gyroscope.setMaxTextSize(maxsize);
+					sensors_text_gyroscope2.setMaxTextSize(maxsize);
+					sensors_text_gyroscope3.setMaxTextSize(maxsize);
+					sensors_text_gyroscope_stamp.setMaxTextSize(maxsize);
 
 					gyroscopeRow.addView(b);
 				}
@@ -608,6 +706,16 @@ public class SensorsActivity extends Activity {
 							.findViewById(R.id.sensors_text_light3));
 					sensors_text_light_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_light_stamp));
+					
+					sensors_text_light.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_light2.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_light3.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_light_stamp.setPadding(0, 0, paddingright, paddingbottom);
+					
+					sensors_text_light.setMaxTextSize(maxsize);
+					sensors_text_light2.setMaxTextSize(maxsize);
+					sensors_text_light3.setMaxTextSize(maxsize);
+					sensors_text_light_stamp.setMaxTextSize(maxsize);
 
 					lightRow.addView(b);
 				}
@@ -648,6 +756,16 @@ public class SensorsActivity extends Activity {
 							.findViewById(R.id.sensors_text_linear_acceleration3));
 					sensors_text_linear_acceleration_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_linear_acceleration_stamp));
+					
+					sensors_text_linear_acceleration.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_linear_acceleration2.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_linear_acceleration3.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_linear_acceleration_stamp.setPadding(0, 0, paddingright, paddingbottom);
+					
+					sensors_text_linear_acceleration.setMaxTextSize(maxsize);
+					sensors_text_linear_acceleration2.setMaxTextSize(maxsize);
+					sensors_text_linear_acceleration3.setMaxTextSize(maxsize);
+					sensors_text_linear_acceleration_stamp.setMaxTextSize(maxsize);
 
 					linearAccelerationRow.addView(b);
 				}
@@ -688,6 +806,11 @@ public class SensorsActivity extends Activity {
 							.findViewById(R.id.sensors_text_magneticfield3));
 					sensors_text_magnetic_field_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_magneticfield_stamp));
+					
+					sensors_text_magnetic_field.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_magnetic_field2.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_magnetic_field3.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_magnetic_field_stamp.setPadding(0, 0, paddingright, paddingbottom);
 
 					magneticfieldRow.addView(b);
 				}
@@ -729,6 +852,11 @@ public class SensorsActivity extends Activity {
 							.findViewById(R.id.sensors_text_orientation3));
 					sensors_text_orientation_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_orientation_stamp));
+					
+					sensors_text_orientation.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_orientation2.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_orientation3.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_orientation_stamp.setPadding(0, 0, paddingright, paddingbottom);
 
 					orientationSensorRow.addView(b);
 				}
@@ -768,6 +896,11 @@ public class SensorsActivity extends Activity {
 							.findViewById(R.id.sensors_text_pressure3));
 					sensors_text_pressure_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_pressure_stamp));
+					
+					sensors_text_pressure.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_pressure2.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_pressure3.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_pressure_stamp.setPadding(0, 0, paddingright, paddingbottom);
 
 					pressureRow.addView(b);
 				}
@@ -807,6 +940,11 @@ public class SensorsActivity extends Activity {
 							.findViewById(R.id.sensors_text_proximity3));
 					sensors_text_proximity_stamp = ((NewFontFitTextView) b
 							.findViewById(R.id.sensors_text_proximity_stamp));
+					
+					sensors_text_proximity.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_proximity2.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_proximity3.setPadding(0, 0, paddingright, paddingbottom);
+					sensors_text_proximity_stamp.setPadding(0, 0, paddingright, paddingbottom);
 
 					proximityRow.addView(b);
 				}
@@ -851,6 +989,11 @@ public class SensorsActivity extends Activity {
 						.findViewById(R.id.sensors_text_sound3));
 				sensors_text_sound_stamp = ((NewFontFitTextView) b
 						.findViewById(R.id.sensors_text_sound_stamp));
+				
+				sensors_text_sound.setPadding(0, 0, paddingright, paddingbottom);
+				sensors_text_sound2.setPadding(0, 0, paddingright, paddingbottom);
+				sensors_text_sound3.setPadding(0, 0, paddingright, paddingbottom);
+				sensors_text_sound_stamp.setPadding(0, 0, paddingright, paddingbottom);
 
 				soundRow.addView(b);
 			}

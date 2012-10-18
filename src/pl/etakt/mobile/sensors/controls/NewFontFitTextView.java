@@ -1,11 +1,16 @@
 package pl.etakt.mobile.sensors.controls;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.TextView;
 
 public class NewFontFitTextView extends TextView {
+	
+	private static final String TAG = "NewFontFitTextView";
 
     public NewFontFitTextView(Context context) {
         super(context);
@@ -53,6 +58,11 @@ public class NewFontFitTextView extends TextView {
     @Override
     protected void onTextChanged(final CharSequence text, final int start, final int before, final int after) {
         refitText(text.toString(), this.getWidth());
+    }
+    
+    public void onCreate(Canvas canvas) {
+        super.onDraw(canvas);
+        Log.d(TAG, "onCreate(Canvas canvas) of NewFontFitTextView");
     }
 
     @Override
