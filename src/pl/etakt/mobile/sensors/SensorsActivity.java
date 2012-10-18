@@ -337,7 +337,7 @@ public class SensorsActivity extends Activity {
     private static float timestamp;
     final static double EPSILON = 0.0000001;
 	
-	private static float[] gyroscope2(float et, float[] ev){
+	@SuppressLint("NewApi") private static float[] gyroscope2(float et, float[] ev){
 		
 		// This timestep's delta rotation to be multiplied by the current rotation
         // after computing it from the gyro sample data.
